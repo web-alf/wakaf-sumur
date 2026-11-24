@@ -1,12 +1,13 @@
 import type { SiteProfile } from '../../domain/entities/SiteProfile';
 
 export const siteProfile: SiteProfile = {
-  name: 'Wakaf Sumur',
+  name: 'Gerakan Wakaf Sumur',
   domain: 'wakafsumur.com',
-  legalName: 'Yayasan Wakaf Sumur Indonesia',
+  logoUrl: '/logo/logo-wordmark.png',
+  legalName: 'Yayasan Gerakan Wakaf Sumur',
   copyrightYear: 2025,
-  donationUrl: 'https://wakafsumur.com/donasi',
-  whatsappUrl: 'https://wa.me/6281234567890',
+  donationUrl: 'https://wakafsumur.com/#Target-pilihwakaf',
+  whatsappUrl: 'https://wa.me/6285185999971',
   navLinks: [
     { label: 'Tentang', target: { kind: 'anchor', href: '#tentang' } },
     { label: 'Program', target: { kind: 'anchor', href: '#program' } },

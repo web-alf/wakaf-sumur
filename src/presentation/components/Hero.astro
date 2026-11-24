@@ -13,7 +13,7 @@
       <h1 class="hero-h1">Satu sumur,<br /><em>ribuan</em><br />berkah mengalir.</h1>
       <p class="hero-desc">
         Di banyak desa terpencil, air bersih adalah kemewahan.
-        Melalui wakaf sumur, <strong>donasi Anda mengalir abadi</strong>
+        Melalui wakaf sumur, <strong>donasi Anda mengalir abadi</strong>{' '}
         menyejukkan ribuan jiwa di pelosok negeri.
       </p>
       <div class="hero-btns">
@@ -66,9 +66,12 @@
   opacity: .5;
 }
 .hero-wave {
-  position: absolute; bottom: -1px; left: 0; right: 0;
-  height: 72px; pointer-events: none;
+  position: absolute; bottom: -1px; left: 0;
+  /* SVG tidak melebar otomatis dengan left/right; wajib width eksplisit */
+  width: 100%; height: 72px; display: block; pointer-events: none;
 }
+/* Ikuti warna latar halaman agar wave menyatu di mode terang & gelap */
+.hero-wave path { fill: var(--bg); }
 .hero-content {
   position: relative; z-index: 2;
   display: grid; grid-template-columns: 1fr auto;

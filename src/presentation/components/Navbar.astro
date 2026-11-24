@@ -12,17 +12,8 @@ const { site } = Astro.props;
 <nav id="nav">
   <div class="wrap">
     <div class="nav-inner">
-      <a class="nav-logo" href="#">
-        <div class="logo-mark">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 2C8 7 4 10 4 14a8 8 0 0016 0c0-4-4-7-8-12z" fill="white"/>
-            <path d="M9 17c0 1.5.9 2.5 2 3" stroke="rgba(255,255,255,.5)" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <div class="logo-text">{site.name}</div>
-          <div class="logo-sub">{site.domain}</div>
-        </div>
+      <a class="nav-logo" href="#" aria-label={site.name}>
+        <img class="logo-img" src={site.logoUrl} alt={site.name} width="256" height="76" />
       </a>
       <ul class="nav-links">
         {site.navLinks.map((link) => <li><SiteLinkAnchor link={link} /></li>)}
@@ -56,14 +47,12 @@ nav.scrolled {
   display: flex; align-items: center; gap: 10px;
   text-decoration: none; color: var(--fg); flex-shrink: 0;
 }
-.logo-mark {
-  width: 38px; height: 38px;
-  background: linear-gradient(135deg, var(--blue) 0%, var(--teal) 100%);
-  border-radius: 11px;
-  display: flex; align-items: center; justify-content: center;
+.logo-img { display: block; height: 40px; width: auto; }
+/* Logo biru → putih agar terbaca di mode gelap */
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme="light"])) .logo-img { filter: brightness(0) invert(1); }
 }
-.logo-text  { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; line-height: 1.2; }
-.logo-sub   { font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-muted); }
+:global(:root[data-theme="dark"]) .logo-img { filter: brightness(0) invert(1); }
 
 .nav-links {
   display: flex; align-items: center; gap: 24px;

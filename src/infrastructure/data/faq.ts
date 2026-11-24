@@ -4,7 +4,7 @@ export const faq: readonly FaqItem[] = [
   {
     question: 'Bagaimana cara berwakaf sumur?',
     answer:
-      'Transfer ke rekening resmi Yayasan Wakaf Sumur Indonesia (BSI atau BCA Syariah), lalu konfirmasi via WhatsApp dengan menyertakan bukti transfer, nama, dan niat wakaf. Tim kami akan merespons dalam 1×24 jam kerja.',
+      'Transfer ke rekening resmi Yayasan Gerakan Wakaf Sumur (BSI atau BCA Syariah), lalu konfirmasi via WhatsApp dengan menyertakan bukti transfer, nama, dan niat wakaf. Tim kami akan merespons dalam 1×24 jam kerja.',
   },
   {
     question: 'Berapa nominal minimum wakaf?',
@@ -19,7 +19,7 @@ export const faq: readonly FaqItem[] = [
   {
     question: 'Apakah yayasan ini legal dan terdaftar?',
     answer:
-      'Ya. Yayasan Wakaf Sumur Indonesia terdaftar secara resmi di Kementerian Hukum dan HAM RI. Seluruh kegiatan operasional diawasi oleh Dewan Syariah internal dan auditor independen.',
+      'Ya. Yayasan Gerakan Wakaf Sumur terdaftar secara resmi di Kementerian Hukum dan HAM RI. Seluruh kegiatan operasional diawasi oleh Dewan Syariah internal dan auditor independen.',
   },
   {
     question: 'Berapa lama proses pembangunan sumur?',

@@ -1,5 +1,5 @@
 {
-  "name": "far-field",
+  "name": "wakaf-sumur",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -9,9 +9,14 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "astro build && wrangler deploy",
+    "preview:worker": "astro build && wrangler dev"
   },
   "dependencies": {
     "astro": "^7.4.13"
+  },
+  "devDependencies": {
+    "wrangler": "^4.167.0"
   }
 }

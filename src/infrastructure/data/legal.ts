@@ -121,7 +121,7 @@ export const refund: LegalDocument = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'WhatsApp: <strong>+62 812-XXXX-XXXX</strong> | Email: <strong>info@wakafsumur.com</strong><br>Jam layanan: Senin–Jumat, 08.00–17.00 WIB',
+          text: 'WhatsApp: <strong>0851-8599-9971</strong> | Email: <strong>info@wakafsumur.com</strong><br>Jam layanan: Senin–Jumat, 08.00–17.00 WIB',
         },
       ],
     },

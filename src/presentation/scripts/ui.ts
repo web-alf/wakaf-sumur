@@ -42,6 +42,67 @@ document.addEventListener('click', (event) => {
   }
 });
 
+// ── Salin nomor rekening ──
+async function copyText(text: string): Promise<boolean> {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {
+    /* lanjut ke fallback */
+  }
+  // Fallback untuk browser lama / konteks non-HTTPS.
+  const area = document.createElement('textarea');
+  area.value = text;
+  area.setAttribute('readonly', '');
+  area.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+  document.body.appendChild(area);
+  area.select();
+  area.setSelectionRange(0, text.length);
+  let ok = false;
+  try {
+    ok = document.execCommand('copy');
+  } catch {
+    ok = false;
+  }
+  area.remove();
+  return ok;
+}
+
+const copyTimers = new WeakMap<HTMLElement, number>();
+
+async function handleCopy(button: HTMLElement) {
+  const number = button.dataset.copy ?? '';
+  const bank = button.dataset.copyBank ?? 'rekening';
+  const status = document.querySelector<HTMLElement>('[data-copy-status]');
+  const ok = await copyText(number);
+
+  button.classList.toggle('is-copied', ok);
+  button.classList.toggle('is-failed', !ok);
+  button.title = ok ? 'Tersalin' : 'Gagal menyalin, salin manual';
+  if (status) {
+    status.textContent = ok
+      ? `Nomor rekening ${bank} tersalin`
+      : `Gagal menyalin nomor rekening ${bank}. Silakan salin manual.`;
+  }
+
+  window.clearTimeout(copyTimers.get(button));
+  copyTimers.set(
+    button,
+    window.setTimeout(() => {
+      button.classList.remove('is-copied', 'is-failed');
+      button.title = 'Salin nomor rekening';
+      if (status) status.textContent = '';
+    }, 2200),
+  );
+}
+
+document.addEventListener('click', (event) => {
+  const button = (event.target as HTMLElement | null)?.closest<HTMLElement>('[data-copy]');
+  if (button) void handleCopy(button);
+});
+
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') closeAllModals();
 });

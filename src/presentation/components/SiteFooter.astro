@@ -14,13 +14,7 @@ const { site } = Astro.props;
     <div class="footer-grid">
       <div>
         <div class="footer-brand">
-          <div class="footer-mark" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2C8 7 4 10 4 14a8 8 0 0016 0c0-4-4-7-8-12z" fill="white"/>
-              <path d="M9 17c0 1.5.9 2.5 2 3" stroke="rgba(255,255,255,.5)" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="footer-name">{site.name}</div>
+          <img class="footer-logo" src={site.logoUrl} alt={site.name} width="256" height="76" />
         </div>
         <p class="footer-desc">Program wakaf air bersih yang amanah, transparan, dan tersalurkan langsung ke desa yang membutuhkan di seluruh Indonesia.</p>
         <div class="footer-socials">
@@ -64,7 +58,8 @@ footer {
   border: 1.5px solid rgba(255,255,255,.25);
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.footer-name { font-family:'Space Grotesk',sans-serif; font-weight:700; color:#fff; font-size:15px; }
+/* Footer berlatar biru → logo dijadikan putih */
+.footer-logo { display: block; height: 44px; width: auto; filter: brightness(0) invert(1); }
 .footer-desc { font-size: 13.5px; color: rgba(255,255,255,.75); line-height: 1.65; margin-bottom: 18px; }
 .footer-socials { display: flex; gap: 14px; }
 .footer-socials :global(a) { font-size: 13px; color: rgba(255,255,255,.6); text-decoration: none; transition: color .2s; }

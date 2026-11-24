@@ -21,6 +21,7 @@ export interface FooterColumn {
 export interface SiteProfile {
   readonly name: string;
   readonly domain: string;
+  readonly logoUrl: string;
   readonly legalName: string;
   readonly copyrightYear: number;
   readonly donationUrl: string;
