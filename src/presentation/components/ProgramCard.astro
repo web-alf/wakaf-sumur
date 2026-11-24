@@ -1,0 +1,68 @@
+---
+import type { ProgramView } from '../../application/usecases/GetLandingPage';
+import { formatRupiahShort } from '../lib/format';
+import { categoryVisual, statusLabel } from '../lib/programPresentation';
+
+interface Props {
+  program: ProgramView;
+}
+
+const { program } = Astro.props;
+const visual = categoryVisual[program.category];
+---
+
+<div class="prog-card r">
+  <div class={`prog-vis ${visual.tone}`}>
+    <span role="img" aria-label={visual.label}>{visual.emoji}</span>
+    <span class="prog-badge">{statusLabel[program.status]}</span>
+  </div>
+  <div class="prog-body">
+    <div class="prog-title">{program.title}</div>
+    <div class="prog-desc">{program.description}</div>
+    <div class="prog-bar-wrap"><div class="prog-fill" style={`width:${program.progressPercent}%`}></div></div>
+    <div class="prog-meta">
+      <span>{formatRupiahShort(program.collectedAmount)} terkumpul</span>
+      <span class="prog-pct">{program.progressPercent}%</span>
+    </div>
+    <a class="prog-cta" href="#donasi">Ikut Berwakaf</a>
+  </div>
+</div>
+
+<style>
+.prog-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;
+  transition: transform .2s, box-shadow .2s;
+}
+.prog-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,.1); }
+.prog-vis {
+  height: 162px; min-width: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 54px; position: relative;
+}
+.pv1 { background: linear-gradient(135deg,#0D47A1,#42A5F5); }
+.pv2 { background: linear-gradient(135deg,#1565C0,#1E88E5); }
+.pv3 { background: linear-gradient(135deg,#0A2E6E,#1565C0); }
+.prog-badge {
+  position: absolute; top: 12px; left: 12px;
+  font-size: 11px; font-weight: 700; letter-spacing: .07em;
+  text-transform: uppercase; background: rgba(255,255,255,.18);
+  color: #fff; padding: 4px 10px; border-radius: 100px;
+}
+.prog-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+.prog-title {
+  font-family: 'Space Grotesk', sans-serif; font-size: .97rem;
+  font-weight: 700; color: var(--fg); margin: 0 0 8px; line-height: 1.3;
+}
+.prog-desc { font-size: 13.5px; color: var(--fg-muted); margin: 0 0 18px; line-height: 1.6; flex: 1; }
+.prog-bar-wrap { height: 6px; background: var(--tag-bg); border-radius: 100px; overflow: hidden; margin-bottom: 7px; }
+.prog-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--blue), var(--teal)); }
+.prog-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--fg-muted); font-weight: 500; margin-bottom: 16px; font-variant-numeric: tabular-nums; }
+.prog-pct { font-weight: 700; color: var(--blue); }
+.prog-cta {
+  display: block; text-align: center; background: var(--blue); color: #fff;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 14px;
+  padding: 12px; border-radius: 10px; text-decoration: none; transition: background .2s;
+}
+.prog-cta:hover { background: var(--blue-dk); }
+</style>

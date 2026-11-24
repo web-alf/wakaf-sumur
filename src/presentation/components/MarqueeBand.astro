@@ -1,0 +1,44 @@
+---
+interface Props {
+  items: readonly string[];
+}
+
+const { items } = Astro.props;
+// Digandakan agar animasi translateX(-50%) berulang mulus.
+const loop = [...items, ...items];
+---
+
+<div class="marquee-band" aria-hidden="true">
+  <div class="marquee-track">
+    {
+      loop.map((text) => (
+        <div class="mq-item"><span class="mq-dot"></span>{text}</div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+/* ── MARQUEE ── */
+.marquee-band {
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding-block: 13px;
+  background: var(--bg);
+}
+.marquee-track {
+  display: flex; width: max-content;
+  animation: mq 28s linear infinite;
+}
+.mq-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 28px;
+  font-size: 12px; font-weight: 600; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--fg-muted);
+  white-space: nowrap;
+}
+.mq-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+@keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+</style>

@@ -1,0 +1,21 @@
+---
+import type { FaqItem } from '../../domain/entities/Faq';
+import Modal from './Modal.astro';
+
+interface Props {
+  items: readonly FaqItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<Modal id="modal-faq" title="Pertanyaan yang Sering Diajukan (FAQ)">
+  {
+    items.map((item) => (
+      <div class="faq-item modal-section">
+        <div class="faq-q" data-faq-toggle>{item.question} <span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>{item.answer}</p></div>
+      </div>
+    ))
+  }
+</Modal>

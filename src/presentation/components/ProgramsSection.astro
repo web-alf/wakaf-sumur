@@ -1,0 +1,31 @@
+---
+import type { ProgramView } from '../../application/usecases/GetLandingPage';
+import ProgramCard from './ProgramCard.astro';
+
+interface Props {
+  programs: readonly ProgramView[];
+}
+
+const { programs } = Astro.props;
+---
+
+<section class="prog-sec" id="program">
+  <div class="wrap">
+    <div class="sec-hdr r">
+      <div>
+        <div class="eyebrow"><b>03</b> / Program Wakaf</div>
+        <h2 class="sec-h2">Pilih program <em>wakaf</em> Anda.</h2>
+      </div>
+      <a class="btn-line" href="#donasi">Semua Program →</a>
+    </div>
+    <div class="prog-grid">
+      {programs.map((program) => <ProgramCard program={program} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+.prog-sec { padding: 84px 0; }
+.prog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 700px) { .prog-grid { grid-template-columns: 1fr; } }
+</style>

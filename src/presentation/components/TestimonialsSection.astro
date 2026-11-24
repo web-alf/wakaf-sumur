@@ -1,0 +1,71 @@
+---
+import type { Testimonial } from '../../domain/entities/Testimonial';
+import { avatarTones } from '../lib/programPresentation';
+
+interface Props {
+  testimonials: readonly Testimonial[];
+}
+
+const { testimonials } = Astro.props;
+---
+
+<section class="testi-sec" id="testimoni">
+  <div class="wrap">
+    <div class="sec-hdr r">
+      <div>
+        <div class="eyebrow"><b>04</b> / Testimoni</div>
+        <h2 class="sec-h2">Mereka yang sudah <em>merasakan</em>.</h2>
+      </div>
+    </div>
+    <div class="testi-grid">
+      {
+        testimonials.map((t, i) => (
+          <div class="testi-card r">
+            <p class="testi-q">{t.quote}</p>
+            <div class="testi-author">
+              <div class={`tav ${avatarTones[i % avatarTones.length]}`} aria-hidden="true">{t.name.charAt(0)}</div>
+              <div>
+                <div class="testi-name">{t.name}</div>
+                <div class="testi-role">{t.role}</div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+/* ── TESTIMONIALS ── */
+.testi-sec { padding: 84px 0; border-top: 1px solid var(--border); }
+.testi-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; margin-top: 44px; }
+.testi-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 30px 28px;
+}
+.testi-q {
+  font-size: 15px; color: var(--fg); line-height: 1.75;
+  margin: 0 0 22px; font-style: italic; min-width: 0;
+  padding-top: 10px; position: relative;
+}
+.testi-q::before {
+  content: '\201C';
+  font-size: 3.4rem; font-family: Georgia, serif;
+  color: var(--gold); line-height: 0;
+  position: absolute; top: -4px; left: -4px;
+}
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.tav {
+  width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 15px; color: #fff;
+}
+.ta1 { background: linear-gradient(135deg,#1565C0,#42A5F5); }
+.ta2 { background: linear-gradient(135deg,#0D47A1,#1565C0); }
+.ta3 { background: linear-gradient(135deg,#1E88E5,#42A5F5); }
+.ta4 { background: linear-gradient(135deg,#0A2E6E,#1565C0); }
+.testi-name { font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:700; color:var(--fg); margin:0 0 2px; }
+.testi-role { font-size:12px; color:var(--fg-muted); margin:0; }
+@media (max-width: 700px) { .testi-grid { grid-template-columns: 1fr; } }
+</style>

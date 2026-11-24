@@ -1,0 +1,23 @@
+---
+import type { SiteLink } from '../../domain/entities/SiteProfile';
+
+interface Props {
+  link: SiteLink;
+  class?: string;
+}
+
+const { link, class: className } = Astro.props;
+const { target } = link;
+---
+
+{
+  target.kind === 'external' ? (
+    <a class={className} href={target.href} target="_blank" rel="noopener">{link.label}</a>
+  ) : target.kind === 'anchor' ? (
+    <a class={className} href={target.href}>{link.label}</a>
+  ) : target.kind === 'policy' ? (
+    <a class={className} href="#" data-modal-open={`modal-${target.policy}`}>{link.label}</a>
+  ) : (
+    <a class={className} href="#">{link.label}</a>
+  )
+}

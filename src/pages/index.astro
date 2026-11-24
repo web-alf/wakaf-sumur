@@ -1,0 +1,40 @@
+---
+import { getLandingPage, getPolicies } from '../infrastructure/container';
+import BaseLayout from '../presentation/layouts/BaseLayout.astro';
+import Navbar from '../presentation/components/Navbar.astro';
+import Hero from '../presentation/components/Hero.astro';
+import StatsGrid from '../presentation/components/StatsGrid.astro';
+import MarqueeBand from '../presentation/components/MarqueeBand.astro';
+import AboutSection from '../presentation/components/AboutSection.astro';
+import WhySection from '../presentation/components/WhySection.astro';
+import ProgramsSection from '../presentation/components/ProgramsSection.astro';
+import TestimonialsSection from '../presentation/components/TestimonialsSection.astro';
+import DonationCta from '../presentation/components/DonationCta.astro';
+import SiteFooter from '../presentation/components/SiteFooter.astro';
+import FaqModal from '../presentation/components/FaqModal.astro';
+import LegalModal from '../presentation/components/LegalModal.astro';
+import WhatsAppFloat from '../presentation/components/WhatsAppFloat.astro';
+
+const page = await getLandingPage.execute();
+const policies = await getPolicies.execute();
+---
+
+<BaseLayout
+  title="Wakaf Sumur — Satu sumur, ribuan berkah mengalir"
+  description="Program wakaf air bersih yang amanah, transparan, dan tersalurkan langsung ke desa yang membutuhkan di seluruh Indonesia."
+>
+  <Navbar site={page.site} />
+  <Hero />
+  <StatsGrid stats={page.stats} />
+  <MarqueeBand items={page.site.highlights} />
+  <AboutSection />
+  <WhySection reasons={page.reasons} />
+  <ProgramsSection programs={page.programs} />
+  <TestimonialsSection testimonials={page.testimonials} />
+  <DonationCta site={page.site} bankAccounts={page.bankAccounts} />
+  <SiteFooter site={page.site} />
+
+  <FaqModal items={policies.faq} />
+  {policies.documents.map((document) => <LegalModal document={document} />)}
+  <WhatsAppFloat href={page.site.whatsappUrl} />
+</BaseLayout>

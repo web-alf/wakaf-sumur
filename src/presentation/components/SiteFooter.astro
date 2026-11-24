@@ -1,0 +1,96 @@
+---
+import type { SiteProfile } from '../../domain/entities/SiteProfile';
+import SiteLinkAnchor from './SiteLinkAnchor.astro';
+
+interface Props {
+  site: SiteProfile;
+}
+
+const { site } = Astro.props;
+---
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <div class="footer-mark" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2C8 7 4 10 4 14a8 8 0 0016 0c0-4-4-7-8-12z" fill="white"/>
+              <path d="M9 17c0 1.5.9 2.5 2 3" stroke="rgba(255,255,255,.5)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="footer-name">{site.name}</div>
+        </div>
+        <p class="footer-desc">Program wakaf air bersih yang amanah, transparan, dan tersalurkan langsung ke desa yang membutuhkan di seluruh Indonesia.</p>
+        <div class="footer-socials">
+          {site.socials.map((link) => <SiteLinkAnchor link={link} />)}
+        </div>
+      </div>
+      {
+        site.footerColumns.map((column) => (
+          <div>
+            <div class="footer-col-ttl">{column.title}</div>
+            <ul class="footer-links">
+              {column.links.map((link) => <li><SiteLinkAnchor link={link} /></li>)}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© {site.copyrightYear} {site.legalName}. Seluruh hak dilindungi.</div>
+      <div class="footer-leg">
+        {site.legalLinks.map((link) => <SiteLinkAnchor link={link} />)}
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+/* ── FOOTER ── */
+footer {
+  background: var(--blue);
+  padding: 56px 0 28px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 36px; margin-bottom: 48px;
+}
+.footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.footer-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(255,255,255,.18);
+  border: 1.5px solid rgba(255,255,255,.25);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.footer-name { font-family:'Space Grotesk',sans-serif; font-weight:700; color:#fff; font-size:15px; }
+.footer-desc { font-size: 13.5px; color: rgba(255,255,255,.75); line-height: 1.65; margin-bottom: 18px; }
+.footer-socials { display: flex; gap: 14px; }
+.footer-socials :global(a) { font-size: 13px; color: rgba(255,255,255,.6); text-decoration: none; transition: color .2s; }
+.footer-socials :global(a):hover { color: #fff; }
+.footer-col-ttl {
+  font-family:'Space Grotesk',sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px;
+}
+.footer-links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.footer-links :global(a) { font-size: 14px; color: rgba(255,255,255,.7); text-decoration: none; transition: color .2s; }
+.footer-links :global(a):hover { color: #fff; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.18);
+  padding-top: 22px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px; flex-wrap: wrap;
+}
+.footer-copy { font-size: 12.5px; color: rgba(255,255,255,.5); }
+.footer-leg { display: flex; gap: 18px; }
+.footer-leg :global(a) { font-size: 12.5px; color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
+.footer-leg :global(a):hover { color: #fff; }
+@media (max-width: 860px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+}
+@media (max-width: 500px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+</style>

@@ -1,0 +1,49 @@
+---
+import type { ImpactStat } from '../../domain/entities/ImpactStat';
+
+interface Props {
+  stats: readonly ImpactStat[];
+}
+
+const { stats } = Astro.props;
+---
+
+<div class="stats-wrap">
+  <div class="wrap">
+    <div class="stats-grid r">
+      {
+        stats.map((stat) => (
+          <div class="stat-cell">
+            <div class="stat-num">{stat.value}</div>
+            <div class="stat-lbl">{stat.label}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+/* ── STATS ── */
+.stats-wrap { padding: 52px 0 44px; }
+.stats-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  background: var(--border); gap: 1px;
+  border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+}
+.stat-cell {
+  background: var(--bg);
+  padding: 32px 20px; text-align: center;
+}
+.stat-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800; color: var(--blue);
+  line-height: 1; margin-bottom: 7px;
+  font-variant-numeric: tabular-nums;
+}
+.stat-lbl {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--fg-muted);
+}
+</style>

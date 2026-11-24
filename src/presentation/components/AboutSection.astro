@@ -1,0 +1,58 @@
+---
+const tags = ['Amanah', 'Transparan', 'Jariyah Abadi'];
+---
+
+<section class="about-sec" id="tentang">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="eyebrow"><b>01</b> / Tentang Kami</div>
+        <h2 class="about-h2">Gerakan wakaf air bersih dari hati ke hati.</h2>
+        <div class="tags">
+          {tags.map((tag) => <span class="tag">{tag}</span>)}
+        </div>
+      </div>
+      <div class="about-body r">
+        <p>Wakaf Sumur hadir karena kami percaya setiap tetes air membawa kehidupan. Di banyak desa terpencil, perempuan dan anak-anak berjalan berjam-jam hanya untuk mendapatkan air &mdash; sering kali tidak layak minum.</p>
+        <p>Melalui program ini, kami membangun sumur bor dan instalasi air bersih di wilayah yang benar-benar membutuhkan. Setiap amanah yang Anda titipkan kami salurkan langsung ke penerima manfaat, dengan laporan terbuka dan terverifikasi.</p>
+        <p>Kami percaya: <strong>menunda wakaf sumur bukan hanya menunda pahala &mdash; tapi menunda kehidupan seseorang.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ── ABOUT ── */
+.about-sec {
+  padding: 84px 0;
+  background: linear-gradient(150deg, #0A2E6E 0%, #1565C0 55%, #42A5F5 100%);
+  margin: 0 10px; border-radius: 20px;
+}
+.about-sec .eyebrow { color: rgba(255,255,255,.55); }
+.about-sec .eyebrow::before { background: #FDD835; }
+.about-sec .eyebrow b { color: #FDD835; }
+.about-sec .about-h2 { color: #FFFFFF; }
+.about-sec .about-body p { color: rgba(255,255,255,.78); }
+.about-sec .about-body strong { color: #fff; }
+.about-sec .tag { color: #fff; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); }
+
+
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.about-h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.7rem);
+  font-weight: 800; line-height: 1.13; margin: 0 0 20px; text-wrap: balance;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.tag {
+  font-size: 12px; font-weight: 600; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--fg-muted);
+  background: var(--tag-bg); padding: 6px 14px; border-radius: 100px;
+  font-family: 'Poppins', sans-serif;
+}
+.about-body { font-family: 'Poppins', sans-serif; }
+.about-body p { color: var(--fg-muted); font-size: 15px; line-height: 1.78; margin: 0 0 18px; }
+.about-body p:last-child { margin-bottom: 0; }
+.about-body strong { color: var(--fg); font-weight: 600; }
+@media (max-width: 700px) { .about-grid { grid-template-columns: 1fr; gap: 28px; } }
+</style>
