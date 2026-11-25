@@ -18,7 +18,7 @@ export const testimonials: readonly Testimonial[] = [
   {
     id: 't3',
     quote:
-      'Saya sempat ragu, tapi setelah melihat laporan yang dikirimkan — lengkap dengan video sumur saat pertama kali dipompa — hati saya tenang. InsyaAllah ini jariyah yang nyata.',
+      'Saya sempat ragu, tapi setelah melihat laporan yang dikirimkan, lengkap dengan video sumur saat pertama kali dipompa, hati saya tenang. InsyaAllah ini jariyah yang nyata.',
     name: 'Rizqiyah H.',
     role: 'Donatur, Surabaya',
   },

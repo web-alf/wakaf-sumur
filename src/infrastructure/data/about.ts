@@ -11,13 +11,13 @@ export const about: AboutContent = {
   heroTitle: 'Air Bersih untuk Semua,',
   heroTitleAccent: 'Wakaf yang Mengalir Tanpa Henti',
   heroLead:
-    'Gerakan Wakaf Sumur adalah program nyata untuk membangun akses air bersih di wilayah yang membutuhkan — melalui amanah wakaf tunai yang terkelola secara transparan dan profesional.',
+    'Gerakan Wakaf Sumur adalah program nyata untuk membangun akses air bersih di wilayah yang membutuhkan melalui amanah wakaf tunai yang terkelola secara transparan dan profesional.',
 
   storyTitle: 'Lahir dari Keprihatinan, Tumbuh dari Kepercayaan',
   storyParagraphs: [
-    'Gerakan Wakaf Sumur bermula dari kepedulian nyata terhadap saudara-saudara kita di pelosok Indonesia yang masih harus berjalan berkilometer hanya untuk mendapat air bersih. Ini bukan masalah yang jauh — ini ada di negeri kita sendiri.',
+    'Gerakan Wakaf Sumur bermula dari kepedulian nyata terhadap saudara-saudara kita di pelosok Indonesia yang masih harus berjalan berkilometer hanya untuk mendapat air bersih. Ini bukan masalah yang jauh. Ini ada di negeri kita sendiri.',
     'Program ini membangun sumur bor dan instalasi air bersih dengan prinsip wakaf: manfaatnya terus mengalir, pahalanya tak putus, dan laporannya terbuka untuk semua pewakaf.',
-    'Setiap sumur yang terbangun adalah amal jariyah yang hidup selama air masih mengalir — untuk warga, ternak, sawah, dan generasi yang belum lahir.',
+    'Setiap sumur yang terbangun adalah amal jariyah yang hidup selama air masih mengalir, untuk warga, ternak, sawah, dan generasi yang belum lahir.',
   ],
 
   vision:
@@ -51,7 +51,7 @@ export const about: AboutContent = {
 
   processTitle: 'Bagaimana Wakaf Anda Bekerja',
   processLead:
-    'Proses sederhana, dampak nyata — dari niat wakaf hingga air mengalir di tangan penerima manfaat.',
+    'Proses sederhana, dampak nyata: dari niat wakaf hingga air mengalir di tangan penerima manfaat.',
   steps: [
     {
       title: 'Pewakaf Berwakaf',
@@ -77,5 +77,5 @@ export const about: AboutContent = {
 
   closingTitle: 'Jadilah Bagian dari Gerakan Ini',
   closingLead:
-    'Satu wakaf Anda bisa memberi air bersih bagi puluhan keluarga — dan pahalanya terus mengalir selama air itu ada.',
+    'Satu wakaf Anda bisa memberi air bersih bagi puluhan keluarga, dan pahalanya terus mengalir selama air itu ada.',
 };

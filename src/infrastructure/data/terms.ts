@@ -70,9 +70,9 @@ export const terms: LegalDocument = {
         {
           type: 'list',
           items: [
-            '<strong>Dana program</strong> — dialokasikan langsung untuk survei lokasi, pembelian material, pembangunan sumur, dan peresmian.',
-            '<strong>Dana operasional</strong> — dialokasikan untuk biaya penghimpunan, logistik lapangan, dokumentasi, dan pengelolaan program.',
-            '<strong>Dana amil</strong> — dialokasikan sesuai ketentuan yang berlaku bagi lembaga filantropi.',
+            '<strong>Dana program</strong>: dialokasikan langsung untuk survei lokasi, pembelian material, pembangunan sumur, dan peresmian.',
+            '<strong>Dana operasional</strong>: dialokasikan untuk biaya penghimpunan, logistik lapangan, dokumentasi, dan pengelolaan program.',
+            '<strong>Dana amil</strong>: dialokasikan sesuai ketentuan yang berlaku bagi lembaga filantropi.',
           ],
         },
         {
@@ -125,7 +125,7 @@ export const terms: LegalDocument = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Seluruh konten di gerakan.wakafsumur.com — termasuk teks, gambar, logo, desain, video, dan materi lainnya — merupakan milik Pengelola. Pengguna tidak diperkenankan menyalin, memodifikasi, atau menggunakan konten untuk tujuan komersial tanpa persetujuan tertulis.',
+          text: 'Seluruh konten di gerakan.wakafsumur.com, termasuk teks, gambar, logo, desain, video, dan materi lainnya, merupakan milik Pengelola. Pengguna tidak diperkenankan menyalin, memodifikasi, atau menggunakan konten untuk tujuan komersial tanpa persetujuan tertulis.',
         },
       ],
     },
