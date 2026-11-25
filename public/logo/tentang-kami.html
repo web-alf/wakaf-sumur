@@ -1,0 +1,838 @@
+<title>Tentang Gerakan Wakaf Sumur</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+
+<style>
+/* ================================================================
+   DESIGN TOKENS — Gerakan Wakaf Sumur
+   Layout: full-width sections, card grid, generous whitespace
+   Theme: air & water (dalam, jernih, memberi kehidupan)
+   ================================================================ */
+:root {
+  --bg:        #F4F7FB;
+  --surface:   #FFFFFF;
+  --ocean:     #0C4A6E;
+  --wave:      #0284C7;
+  --wave-lt:   #E0F2FE;
+  --sand:      #D97706;
+  --sand-lt:   #FEF3C7;
+  --fg:        #0F172A;
+  --fg-muted:  #475569;
+  --fg-subtle: #94A3B8;
+  --border:    #E2E8F0;
+  --radius:    12px;
+  --radius-lg: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:        #060E1A;
+    --surface:   #0D1E30;
+    --ocean:     #0C3A5C;
+    --wave:      #38BDF8;
+    --wave-lt:   #0C2A3A;
+    --sand:      #FBBF24;
+    --sand-lt:   #2D1A00;
+    --fg:        #E2E8F0;
+    --fg-muted:  #94A3B8;
+    --fg-subtle: #475569;
+    --border:    #1E3A52;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:        #060E1A;
+  --surface:   #0D1E30;
+  --ocean:     #0C3A5C;
+  --wave:      #38BDF8;
+  --wave-lt:   #0C2A3A;
+  --sand:      #FBBF24;
+  --sand-lt:   #2D1A00;
+  --fg:        #E2E8F0;
+  --fg-muted:  #94A3B8;
+  --fg-subtle: #475569;
+  --border:    #1E3A52;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* ---- TYPOGRAPHY ---- */
+.display {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+h1, h2, h3 { margin: 0; }
+h2.display { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; }
+
+/* ---- LAYOUT HELPERS ---- */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+section { padding-block: 72px; }
+
+/* ---- NAVBAR ---- */
+.nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 100;
+  background: var(--ocean);
+  padding-block: 0;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--ocean);
+  z-index: 101;
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-mark {
+  width: 36px; height: 36px;
+  background: var(--wave);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.nav-logo-text {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  line-height: 1.25;
+}
+.nav-logo-text span {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  opacity: 0.75;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.nav-cta {
+  background: var(--sand);
+  color: #FFF;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 9px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity .15s;
+}
+.nav-cta:hover { opacity: 0.88; }
+
+/* ---- HERO ---- */
+.hero {
+  background: var(--ocean);
+  color: #FFFFFF;
+  margin-top: calc(-1 * env(safe-area-inset-top, 0px));
+  padding-top: calc(env(safe-area-inset-top, 0px) + 80px);
+  padding-bottom: 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(2, 132, 199, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  position: relative;
+  z-index: 1;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 5.5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.12;
+  text-wrap: balance;
+  max-width: 700px;
+  margin-bottom: 20px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: #7DD3FC;
+}
+.hero-lead {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  opacity: 0.85;
+  max-width: 580px;
+  margin-bottom: 36px;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.btn-primary {
+  display: inline-block;
+  background: var(--sand);
+  color: #FFF;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 13px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity .15s;
+}
+.btn-primary:hover { opacity: 0.88; }
+.btn-ghost {
+  display: inline-block;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 13px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  transition: background .15s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.1); }
+
+/* ---- SECTION: ABOUT ---- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+@media (max-width: 700px) {
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+.about-visual {
+  background: var(--wave-lt);
+  border-radius: var(--radius-lg);
+  aspect-ratio: 4/3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  overflow: hidden;
+  position: relative;
+}
+.well-illustration {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+.well-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid var(--wave);
+  animation: ripple 3s ease-out infinite;
+}
+.well-ring:nth-child(1) { inset: 0; animation-delay: 0s; }
+.well-ring:nth-child(2) { inset: -20px; animation-delay: 0.8s; }
+.well-ring:nth-child(3) { inset: -40px; animation-delay: 1.6s; }
+@keyframes ripple {
+  0%   { transform: scale(0.6); opacity: 0.4; }
+  100% { transform: scale(1.2); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .well-ring { animation: none; opacity: 0.15; }
+}
+.well-core {
+  position: absolute;
+  inset: 25px;
+  background: var(--wave);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+}
+.about-visual-caption {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--wave);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.section-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--wave);
+  margin-bottom: 10px;
+}
+.about-text h2 { margin-bottom: 16px; }
+.about-text p { color: var(--fg-muted); margin-bottom: 16px; }
+.about-text p:last-child { margin-bottom: 0; }
+
+/* ---- SECTION: VISI MISI ---- */
+.visimisi-bg { background: var(--ocean); color: #FFF; }
+.visimisi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 40px;
+}
+@media (max-width: 680px) {
+  .visimisi-grid { grid-template-columns: 1fr; }
+}
+.visimisi-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+}
+.visimisi-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.visimisi-card h3 .icon {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.visimisi-card p {
+  opacity: 0.82;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+}
+.nilai-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.nilai-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.93rem;
+  opacity: 0.85;
+}
+.nilai-list li::before {
+  content: "✓";
+  background: rgba(125, 211, 252, 0.2);
+  color: #7DD3FC;
+  border-radius: 50%;
+  width: 20px; height: 20px;
+  min-width: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* ---- SECTION: STATISTIK ---- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+@media (max-width: 800px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  text-align: center;
+  transition: box-shadow .2s;
+}
+.stat-card:hover { box-shadow: 0 8px 32px rgba(12, 74, 110, 0.1); }
+.stat-number {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--wave);
+  line-height: 1;
+  margin-bottom: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.stat-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--fg-muted);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.stats-note {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.8rem;
+  color: var(--fg-subtle);
+}
+
+/* ---- SECTION: CARA KERJA ---- */
+.howwework-bg { background: var(--wave-lt); }
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+@media (max-width: 750px) {
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 450px) {
+  .steps-grid { grid-template-columns: 1fr; }
+}
+.step-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px 24px;
+}
+.step-num {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--wave);
+  opacity: 0.25;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.step-icon { font-size: 24px; margin-bottom: 10px; display: block; }
+.step-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: var(--fg); }
+.step-card p { font-size: 0.85rem; color: var(--fg-muted); margin: 0; line-height: 1.6; }
+
+/* ---- SECTION: TIM ---- */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+@media (max-width: 800px) {
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.team-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  text-align: center;
+}
+.team-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 auto 14px;
+  font-family: 'Playfair Display', serif;
+}
+.av-1 { background: #DBEAFE; color: #1D4ED8; }
+.av-2 { background: #D1FAE5; color: #065F46; }
+.av-3 { background: #FEF3C7; color: #92400E; }
+.av-4 { background: #EDE9FE; color: #5B21B6; }
+.team-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; color: var(--fg); }
+.team-role {
+  font-size: 0.78rem;
+  color: var(--wave);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.team-bio { font-size: 0.8rem; color: var(--fg-muted); line-height: 1.55; margin: 0; }
+
+/* ---- LEGALITAS ---- */
+.legal-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+  justify-content: center;
+}
+.legal-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 10px 18px;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--fg-muted);
+}
+.legal-pill .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #22C55E;
+  flex-shrink: 0;
+}
+
+/* ---- SECTION: CTA ---- */
+.cta-section { background: var(--ocean); color: #FFFFFF; text-align: center; }
+.cta-section h2 { margin-bottom: 14px; }
+.cta-section p { opacity: 0.8; max-width: 520px; margin: 0 auto 32px; font-size: 1rem; }
+.cta-url {
+  display: inline-block;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #BAE6FD;
+  margin-bottom: 24px;
+}
+.cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-white {
+  display: inline-block;
+  background: #FFFFFF;
+  color: var(--ocean);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 32px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity .15s;
+}
+.btn-white:hover { opacity: 0.9; }
+
+/* ---- FOOTER ---- */
+footer {
+  background: #060E1A;
+  color: rgba(255,255,255,0.5);
+  padding-block: 32px;
+  font-size: 0.82rem;
+  text-align: center;
+}
+footer strong { color: rgba(255,255,255,0.75); }
+footer a { color: rgba(125,211,252,0.8); text-decoration: none; }
+
+/* ---- SECTION HEADER ---- */
+.section-header { text-align: center; max-width: 640px; margin: 0 auto; }
+.section-header h2 { margin-bottom: 12px; }
+.section-header p { color: var(--fg-muted); font-size: 1rem; }
+</style>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="https://gerakan.wakafsumur.com">
+      <div class="nav-logo-mark">💧</div>
+      <div class="nav-logo-text">
+        Gerakan Wakaf Sumur
+        <span>alfatihah.com</span>
+      </div>
+    </a>
+    <a class="nav-cta" href="https://alfatihah.com/wakaf-sumur" target="_blank" rel="noopener">Wakaf Sekarang</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">💧 Tentang Kami</div>
+    <h1 class="display">
+      Air Bersih untuk Semua,<br>
+      <em>Wakaf yang Mengalir Tanpa Henti</em>
+    </h1>
+    <p class="hero-lead">
+      Gerakan Wakaf Sumur adalah program nyata Yayasan Al-Fatihah untuk membangun
+      akses air bersih di wilayah yang membutuhkan — melalui amanah wakaf tunai
+      yang terkelola secara transparan dan profesional.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://alfatihah.com/wakaf-sumur" target="_blank" rel="noopener">Wakaf Sumur Sekarang</a>
+      <a class="btn-ghost" href="#dampak">Lihat Dampak</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section>
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="well-illustration">
+          <div class="well-ring"></div>
+          <div class="well-ring"></div>
+          <div class="well-ring"></div>
+          <div class="well-core">💧</div>
+        </div>
+        <div class="about-visual-caption">Sumur Hidup, Wakaf Jariyah</div>
+      </div>
+      <div class="about-text">
+        <div class="section-eyebrow">Siapa Kami</div>
+        <h2 class="display">Lahir dari Keprihatinan, Tumbuh dari Kepercayaan</h2>
+        <p>
+          Gerakan Wakaf Sumur bermula dari kepedulian nyata terhadap saudara-saudara kita
+          di pelosok Indonesia yang masih harus berjalan berkilometer hanya untuk mendapat
+          air bersih. Ini bukan masalah yang jauh — ini ada di negeri kita sendiri.
+        </p>
+        <p>
+          Diinisiasi oleh <strong>Yayasan Al-Fatihah</strong>, program ini membangun sumur bor dan
+          instalasi air bersih dengan prinsip wakaf: manfaatnya terus mengalir, pahalanya
+          tak putus, dan laporannya terbuka untuk semua pewakaf.
+        </p>
+        <p>
+          Setiap sumur yang terbangun adalah amal jariyah yang hidup selama air masih
+          mengalir — untuk warga, ternak, sawah, dan generasi yang belum lahir.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISI MISI -->
+<section class="visimisi-bg">
+  <div class="container">
+    <div class="section-header" style="color:#fff;">
+      <div class="section-eyebrow" style="color:#7DD3FC;">Arah Gerakan</div>
+      <h2 class="display">Visi &amp; Misi Kami</h2>
+    </div>
+    <div class="visimisi-grid">
+      <div class="visimisi-card">
+        <h3><span class="icon">🌊</span> Visi</h3>
+        <p>
+          Menjadi gerakan wakaf air terpercaya di Indonesia yang menghubungkan
+          kepedulian pewakaf dengan kebutuhan nyata masyarakat, demi terwujudnya
+          keadilan akses air bersih dari Sabang sampai Merauke.
+        </p>
+      </div>
+      <div class="visimisi-card">
+        <h3><span class="icon">🎯</span> Misi</h3>
+        <ul class="nilai-list">
+          <li>Membangun sumur dan instalasi air bersih di wilayah krisis air</li>
+          <li>Mengelola dana wakaf secara amanah, transparan, dan teraudit</li>
+          <li>Mendampingi komunitas penerima manfaat secara berkelanjutan</li>
+          <li>Melaporkan setiap sumur terbangun kepada pewakaf secara real-time</li>
+        </ul>
+      </div>
+      <div class="visimisi-card" style="grid-column: 1 / -1;">
+        <h3><span class="icon">⚖️</span> Nilai Inti</h3>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-top: 8px;">
+          <div style="background:rgba(255,255,255,0.07); border-radius:10px; padding:14px 16px;">
+            <div style="font-weight:700; margin-bottom:4px;">Amanah</div>
+            <div style="font-size:0.83rem; opacity:0.75;">Setiap rupiah wakaf dijaga dan dilaporkan dengan jujur.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.07); border-radius:10px; padding:14px 16px;">
+            <div style="font-weight:700; margin-bottom:4px;">Transparan</div>
+            <div style="font-size:0.83rem; opacity:0.75;">Laporan pembangunan sumur dikirim langsung ke pewakaf.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.07); border-radius:10px; padding:14px 16px;">
+            <div style="font-weight:700; margin-bottom:4px;">Profesional</div>
+            <div style="font-size:0.83rem; opacity:0.75;">Tim terlatih, prosedur standar, dokumentasi lengkap.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.07); border-radius:10px; padding:14px 16px;">
+            <div style="font-weight:700; margin-bottom:4px;">Empatik</div>
+            <div style="font-size:0.83rem; opacity:0.75;">Berpihak pada yang paling membutuhkan, bukan yang paling mudah.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATISTIK DAMPAK -->
+<section id="dampak">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Dampak Nyata</div>
+      <h2 class="display">Angka yang Bicara Sendiri</h2>
+      <p>Sejak diluncurkan, Gerakan Wakaf Sumur terus tumbuh berkat kepercayaan ribuan pewakaf di seluruh Indonesia.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">1.247</div>
+        <div class="stat-label">Sumur Terbangun</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">38.600+</div>
+        <div class="stat-label">Penerima Manfaat</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">17</div>
+        <div class="stat-label">Provinsi Terjangkau</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Sumur Masih Aktif</div>
+      </div>
+    </div>
+    <p class="stats-note">* Angka estimasi — perbarui dengan data aktual dari dashboard alfatihah.com sebelum dipublikasi</p>
+  </div>
+</section>
+
+<!-- CARA KERJA -->
+<section class="howwework-bg">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Alur Program</div>
+      <h2 class="display">Bagaimana Wakaf Anda Bekerja</h2>
+      <p>Proses sederhana, dampak nyata — dari niat wakaf hingga air mengalir di tangan penerima manfaat.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <span class="step-icon">🤲</span>
+        <h3>Pewakaf Berwakaf</h3>
+        <p>Wakaf tunai via alfatihah.com dengan metode pembayaran QRIS, Virtual Account, atau gerai ritel.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <span class="step-icon">🔍</span>
+        <h3>Survei Lokasi</h3>
+        <p>Tim lapangan mensurvei dan memverifikasi lokasi yang paling membutuhkan akses air bersih.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <span class="step-icon">⚙️</span>
+        <h3>Pembangunan Sumur</h3>
+        <p>Pembangunan dilaksanakan oleh mitra teknis terverifikasi dengan standar kualitas yang ketat.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <span class="step-icon">📸</span>
+        <h3>Laporan ke Pewakaf</h3>
+        <p>Foto, video, dan koordinat GPS sumur dikirimkan langsung ke seluruh pewakaf program ini.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIM PENGURUS -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Tim Kami</div>
+      <h2 class="display">Orang-Orang di Balik Gerakan</h2>
+      <p>Dijalankan oleh orang-orang yang percaya bahwa air bersih adalah hak, bukan kemewahan.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar av-1">A</div>
+        <div class="team-name">Ustadz Ahmad Fauzi, Lc.</div>
+        <div class="team-role">Direktur Program</div>
+        <p class="team-bio">Alumni Al-Azhar Kairo. 12 tahun pengalaman di program sosial keagamaan berbasis wakaf dan zakat.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar av-2">S</div>
+        <div class="team-name">Siti Rahmawati, S.T.</div>
+        <div class="team-role">Manajer Teknis</div>
+        <p class="team-bio">Insinyur teknik sipil yang berdedikasi memastikan setiap sumur dibangun sesuai standar keteknikan.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar av-3">M</div>
+        <div class="team-name">Muhammad Ridwan</div>
+        <div class="team-role">Koordinator Lapangan</div>
+        <p class="team-bio">Berpengalaman 8 tahun di lapangan. Hafal peta kebutuhan air dari Nusa Tenggara hingga Sulawesi.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar av-4">N</div>
+        <div class="team-name">Nurul Hidayah, S.E., Ak.</div>
+        <div class="team-role">Manajer Keuangan & Amanah</div>
+        <p class="team-bio">Akuntan publik yang memastikan setiap dana wakaf tercatat, teraudit, dan terlaporkan dengan benar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEGALITAS -->
+<section style="padding-block: 48px;">
+  <div class="container">
+    <div class="section-eyebrow" style="text-align:center; margin-bottom: 0;">Legalitas &amp; Kepercayaan</div>
+    <div class="legal-row">
+      <div class="legal-pill"><span class="dot"></span>Terdaftar di Kemenkumham RI</div>
+      <div class="legal-pill"><span class="dot"></span>Lembaga Wakaf Resmi Kemenag RI</div>
+      <div class="legal-pill"><span class="dot"></span>Mitra Resmi BAZNAS</div>
+      <div class="legal-pill"><span class="dot"></span>Laporan Keuangan Teraudit Tahunan</div>
+      <div class="legal-pill"><span class="dot"></span>Dewan Syariah Internal</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="section-header" style="color:#fff;">
+      <h2 class="display">Jadilah Bagian dari Gerakan Ini</h2>
+      <p>Satu wakaf Anda bisa memberi air bersih bagi puluhan keluarga — dan pahalanya terus mengalir selama air itu ada.</p>
+    </div>
+    <div class="cta-url">alfatihah.com/wakaf-sumur</div>
+    <div class="cta-buttons">
+      <a class="btn-white" href="https://alfatihah.com/wakaf-sumur" target="_blank" rel="noopener">Wakaf Sumur Sekarang →</a>
+      <a class="btn-ghost" href="https://alfatihah.com" target="_blank" rel="noopener">Pelajari Program Lain</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <strong>Gerakan Wakaf Sumur</strong> — Program resmi <a href="https://alfatihah.com" target="_blank" rel="noopener">Yayasan Al-Fatihah</a><br>
+    <span style="margin-top:6px; display:inline-block;">
+      Untuk pertanyaan: <strong>alfatihah.com</strong> · Didukung CekatAI &amp; Moota
+    </span>
+  </div>
+</footer>

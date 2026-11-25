@@ -1,6 +1,7 @@
 ---
 import type { BankAccount } from '../../domain/entities/BankAccount';
 import type { SiteProfile } from '../../domain/entities/SiteProfile';
+import { buildWhatsAppUrl } from '../../domain/services/whatsapp';
 
 interface Props {
   site: SiteProfile;
@@ -12,6 +13,9 @@ const { site, bankAccounts } = Astro.props;
 // Jika semua rekening atas nama yang sama, tampilkan satu kali saja.
 const holders = new Set(bankAccounts.map((b) => b.accountHolder));
 const sharedHolder = holders.size === 1 ? [...holders][0] : null;
+
+const confirmUrl = buildWhatsAppUrl(site.whatsappNumber);
+const contactUrl = buildWhatsAppUrl(site.whatsappNumber, site.whatsappGreetings.contact);
 ---
 
 <section class="cta-sec" id="donasi">
@@ -21,8 +25,7 @@ const sharedHolder = holders.size === 1 ? [...holders][0] : null;
     <h2 class="cta-h2">Satu transfer. Jariyah <em>seumur hidup</em>.</h2>
     <p class="cta-sub">Transfer ke rekening di bawah, lalu konfirmasi via WhatsApp kami. Laporan lengkap dikirimkan saat sumur selesai dibangun.</p>
     <div class="cta-btns">
-      <a class="btn-gold" href={site.donationUrl} target="_blank" rel="noopener">Donasi via Website →</a>
-      <a class="btn-glass" href={site.whatsappUrl} target="_blank" rel="noopener">Konfirmasi WhatsApp</a>
+      <a class="btn-gold" href={confirmUrl} target="_blank" rel="noopener">Konfirmasi WhatsApp</a>
     </div>
     <div class="cta-box">
       {sharedHolder && <div class="cta-holder">Semua rekening atas nama <strong>{sharedHolder}</strong></div>}
@@ -57,6 +60,14 @@ const sharedHolder = holders.size === 1 ? [...holders][0] : null;
       </div>
       <div class="sr-only" role="status" aria-live="polite" data-copy-status></div>
     </div>
+
+    <div class="cta-contact" id="kontak">
+      <h3 class="cta-contact-ttl">Kontak</h3>
+      <p class="cta-contact-txt">Ada pertanyaan seputar wakaf sumur? Hubungi kami melalui WhatsApp.</p>
+      <a class="btn-glass cta-contact-btn" href={contactUrl} target="_blank" rel="noopener">
+        WhatsApp {site.whatsappDisplay}
+      </a>
+    </div>
   </div>
 </section>
 
@@ -64,7 +75,7 @@ const sharedHolder = holders.size === 1 ? [...holders][0] : null;
 /* ── CTA DONASI ── */
 .cta-sec {
   margin: 0 10px 52px;
-  background: linear-gradient(140deg, #0A2E6E 0%, #1565C0 55%, #42A5F5 100%);
+  background: var(--grad-section);
   border-radius: 20px; padding: 84px 0;
   text-align: center; color: #fff; position: relative; overflow: hidden;
 }
@@ -90,6 +101,22 @@ const sharedHolder = holders.size === 1 ? [...holders][0] : null;
   max-width: 460px; margin: 0 auto 38px; line-height: 1.72;
 }
 .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cta-contact {
+  max-width: 880px; margin: 40px auto 0; padding-top: 36px;
+  border-top: 1px solid rgba(255,255,255,.22);
+  scroll-margin-top: 24px;
+}
+.cta-contact-ttl {
+  font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; font-weight: 700;
+  color: #fff; margin: 0 0 8px;
+}
+.cta-contact-txt { font-size: 15px; color: rgba(255,255,255,.85); margin: 0 0 20px; }
+.cta-contact-btn { justify-content: center; min-height: 48px; }
+@media (max-width: 600px) {
+  .cta-contact { margin-top: 28px; padding-top: 28px; }
+  .cta-contact-txt { font-size: 16px; }
+  .cta-contact-btn { display: flex; }
+}
 .cta-box {
   margin: 40px auto 0;
   max-width: 880px;
@@ -133,7 +160,7 @@ const sharedHolder = holders.size === 1 ? [...holders][0] : null;
   display: inline-flex; align-items: center; justify-content: center;
   width: 36px; height: 36px; padding: 0;
   color: var(--blue-dk); background: #fff;
-  border: 1.5px solid var(--blue); border-radius: 50%;
+  border: 1.5px solid var(--blue); border-radius: var(--radius-btn);
   cursor: pointer; transition: background .2s, color .2s, border-color .2s;
 }
 .cta-copy::after { content: ''; position: absolute; inset: -4px; }
@@ -147,5 +174,27 @@ const sharedHolder = holders.size === 1 ? [...holders][0] : null;
 @media (max-width: 600px) {
   .cta-sec { margin: 0 8px 36px; border-radius: 16px; }
   .cta-box { padding: 22px 20px 24px; }
+}
+@media (max-width: 600px) {
+  .cta-sec { padding: 52px 0; }
+  .cta-sub { font-size: 16px; margin-bottom: 28px; }
+  .cta-btns { flex-direction: column; align-items: stretch; }
+  .cta-btns > a { justify-content: center; min-height: 48px; }
+  .cta-box { margin-top: 28px; }
+  .cta-accounts { flex-direction: column; flex-wrap: nowrap; gap: 0; }
+  .cta-account {
+    flex: none; width: 100%;
+    display: grid; grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "nm copy" "no copy" "own copy";
+    align-items: center; column-gap: 12px;
+    text-align: left; padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+  }
+  .cta-account:last-child { border-bottom: 0; padding-bottom: 0; }
+  .cta-no-row { display: contents; }
+  .cta-bank-nm { grid-area: nm; margin: 0; }
+  .cta-bank-no { grid-area: no; font-size: 1.2rem; }
+  .cta-bank-own { grid-area: own; }
+  .cta-copy { grid-area: copy; width: 44px; height: 44px; }
 }
 </style>

@@ -1,0 +1,27 @@
+---
+import { buildWhatsAppUrl } from '../domain/services/whatsapp';
+import { getAboutPage, getPolicies } from '../infrastructure/container';
+import BaseLayout from '../presentation/layouts/BaseLayout.astro';
+import Navbar from '../presentation/components/Navbar.astro';
+import AboutPage from '../presentation/components/AboutPage.astro';
+import SiteFooter from '../presentation/components/SiteFooter.astro';
+import FaqModal from '../presentation/components/FaqModal.astro';
+import LegalModal from '../presentation/components/LegalModal.astro';
+import WhatsAppFloat from '../presentation/components/WhatsAppFloat.astro';
+
+const page = await getAboutPage.execute();
+const policies = await getPolicies.execute();
+---
+
+<BaseLayout
+  title="Tentang Kami — Gerakan Wakaf Sumur"
+  description="Mengenal Gerakan Wakaf Sumur: visi, misi, capaian penerima manfaat, dan alur program wakaf air bersih."
+>
+  <Navbar site={page.site} />
+  <AboutPage about={page.about} />
+  <SiteFooter site={page.site} />
+
+  <FaqModal items={policies.faq} />
+  {policies.documents.map((document) => <LegalModal document={document} />)}
+  <WhatsAppFloat href={buildWhatsAppUrl(page.site.whatsappNumber, page.site.whatsappGreetings.floating)} />
+</BaseLayout>

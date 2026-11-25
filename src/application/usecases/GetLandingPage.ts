@@ -8,8 +8,13 @@ import { getProgressPercent } from '../../domain/services/programProgress';
 import type { ContentRepository } from '../ports/ContentRepository';
 
 export interface ProgramView extends Program {
-  readonly progressPercent: number;
+  /** null = program tanpa batas target. */
+  readonly progressPercent: number | null;
+  /** Tujuan tombol kartu: campaign asli → daftar campaign → blok donasi di halaman ini. */
+  readonly ctaUrl: string;
 }
+
+const FALLBACK_CTA = '#donasi';
 
 export interface LandingPageData {
   readonly site: SiteProfile;
@@ -37,7 +42,11 @@ export class GetLandingPage {
       site,
       stats,
       reasons,
-      programs: programs.map((p) => ({ ...p, progressPercent: getProgressPercent(p) })),
+      programs: programs.map((p) => ({
+        ...p,
+        progressPercent: getProgressPercent(p),
+        ctaUrl: p.campaignUrl?.trim() || site.campaignsUrl?.trim() || FALLBACK_CTA,
+      })),
       testimonials,
       bankAccounts,
     };

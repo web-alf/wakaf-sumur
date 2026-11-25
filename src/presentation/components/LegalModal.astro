@@ -10,7 +10,7 @@ const { document: doc } = Astro.props;
 ---
 
 <Modal id={`modal-${doc.key}`} title={doc.title}>
-  <p>Terakhir diperbarui: {doc.lastUpdated}</p>
+  {doc.lastUpdated && <p>Terakhir diperbarui: {doc.lastUpdated}</p>}
   {
     doc.sections.map((section) => (
       <div class="modal-section">

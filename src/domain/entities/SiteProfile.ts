@@ -24,8 +24,18 @@ export interface SiteProfile {
   readonly logoUrl: string;
   readonly legalName: string;
   readonly copyrightYear: number;
-  readonly donationUrl: string;
-  readonly whatsappUrl: string;
+  /** Halaman daftar campaign di website utama. Tujuan "Lihat Program" dan "Semua Program". */
+  readonly campaignsUrl?: string;
+  /** Nomor WhatsApp format internasional tanpa "+", mis. 6285185999971. */
+  readonly whatsappNumber: string;
+  /** Nomor WhatsApp untuk ditampilkan, mis. 0851-8599-9971. */
+  readonly whatsappDisplay: string;
+  readonly whatsappGreetings: {
+    /** Tombol "Hubungi Kami" di navbar dan blok kontak. */
+    readonly contact: string;
+    /** Tombol WhatsApp melayang. */
+    readonly floating: string;
+  };
   readonly navLinks: readonly SiteLink[];
   readonly highlights: readonly string[];
   readonly socials: readonly SiteLink[];

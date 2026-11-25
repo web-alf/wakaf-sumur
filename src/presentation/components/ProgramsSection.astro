@@ -4,9 +4,12 @@ import ProgramCard from './ProgramCard.astro';
 
 interface Props {
   programs: readonly ProgramView[];
+  /** Halaman daftar campaign; kosong = blok donasi di halaman ini. */
+  campaignsUrl?: string;
 }
 
-const { programs } = Astro.props;
+const { programs, campaignsUrl } = Astro.props;
+const allProgramsUrl = campaignsUrl?.trim() || '#donasi';
 ---
 
 <section class="prog-sec" id="program">
@@ -16,7 +19,7 @@ const { programs } = Astro.props;
         <div class="eyebrow"><b>03</b> / Program Wakaf</div>
         <h2 class="sec-h2">Pilih program <em>wakaf</em> Anda.</h2>
       </div>
-      <a class="btn-line" href="#donasi">Semua Program →</a>
+      <a class="btn-line" href={allProgramsUrl}>Semua Program →</a>
     </div>
     <div class="prog-grid">
       {programs.map((program) => <ProgramCard program={program} />)}
@@ -28,4 +31,9 @@ const { programs } = Astro.props;
 .prog-sec { padding: 84px 0; }
 .prog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 @media (max-width: 700px) { .prog-grid { grid-template-columns: 1fr; } }
+@media (max-width: 700px) {
+  .prog-sec { padding: 52px 0; }
+  .sec-hdr { margin-bottom: 28px; }
+  .btn-line { min-height: 44px; justify-content: center; }
+}
 </style>

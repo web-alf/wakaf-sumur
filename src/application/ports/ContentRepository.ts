@@ -1,3 +1,4 @@
+import type { AboutContent } from '../../domain/entities/About';
 import type { BankAccount } from '../../domain/entities/BankAccount';
 import type { FaqItem } from '../../domain/entities/Faq';
 import type { ImpactStat } from '../../domain/entities/ImpactStat';
@@ -20,4 +21,5 @@ export interface ContentRepository {
   getBankAccounts(): Promise<readonly BankAccount[]>;
   getFaq(): Promise<readonly FaqItem[]>;
   getLegalDocuments(): Promise<readonly LegalDocument[]>;
+  getAbout(): Promise<AboutContent>;
 }

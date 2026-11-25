@@ -4,12 +4,12 @@ export const faq: readonly FaqItem[] = [
   {
     question: 'Bagaimana cara berwakaf sumur?',
     answer:
-      'Transfer ke rekening resmi Yayasan Gerakan Wakaf Sumur (BSI atau BCA Syariah), lalu konfirmasi via WhatsApp dengan menyertakan bukti transfer, nama, dan niat wakaf. Tim kami akan merespons dalam 1×24 jam kerja.',
+      'Transfer ke rekening resmi Yayasan Gerakan Wakaf Sumur yang tertera di halaman ini, lalu konfirmasi via WhatsApp dengan menyertakan bukti transfer, nama, dan niat wakaf. Tim kami akan merespons dalam 1×24 jam kerja.',
   },
   {
     question: 'Berapa nominal minimum wakaf?',
     answer:
-      'Tidak ada batas minimum. Setiap nominal diterima dan disalurkan. Namun untuk membantu satu sumur bor penuh, dibutuhkan sekitar Rp 25–50 juta tergantung lokasi dan kedalaman.',
+      'Minimal donasi wakaf adalah Rp 100.000. Untuk membantu satu sumur bor penuh, dibutuhkan sekitar Rp 25–50 juta tergantung lokasi dan kedalaman.',
   },
   {
     question: 'Apakah ada laporan setelah sumur dibangun?',

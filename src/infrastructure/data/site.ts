@@ -2,17 +2,24 @@ import type { SiteProfile } from '../../domain/entities/SiteProfile';
 
 export const siteProfile: SiteProfile = {
   name: 'Gerakan Wakaf Sumur',
-  domain: 'wakafsumur.com',
+  domain: 'gerakan.wakafsumur.com',
   logoUrl: '/logo/logo-wordmark.png',
   legalName: 'Yayasan Gerakan Wakaf Sumur',
   copyrightYear: 2025,
-  donationUrl: 'https://wakafsumur.com/#Target-pilihwakaf',
-  whatsappUrl: 'https://wa.me/6285185999971',
+  // Halaman daftar campaign: tujuan "Lihat Program", "Semua Program", dan
+  // tombol kartu program yang campaignUrl-nya belum diisi.
+  campaignsUrl: 'https://wakafsumur.com/#Target-pilihwakaf',
+  whatsappNumber: '6285185999971',
+  whatsappDisplay: '0851-8599-9971',
+  whatsappGreetings: {
+    contact: 'Halo kak, saya ingin wakaf sumur mohon dibantu',
+    floating: 'Kak, saya tertarik untuk wakaf sumur mohon dibantu',
+  },
   navLinks: [
-    { label: 'Tentang', target: { kind: 'anchor', href: '#tentang' } },
-    { label: 'Program', target: { kind: 'anchor', href: '#program' } },
-    { label: 'Testimoni', target: { kind: 'anchor', href: '#testimoni' } },
-    { label: 'Kontak', target: { kind: 'anchor', href: '#donasi' } },
+    { label: 'Tentang Kami', target: { kind: 'anchor', href: '/tentang-kami' } },
+    { label: 'Program', target: { kind: 'anchor', href: '/#program' } },
+    { label: 'Testimoni', target: { kind: 'anchor', href: '/#testimoni' } },
+    { label: 'Kontak', target: { kind: 'anchor', href: '/#kontak' } },
   ],
   highlights: [
     'Amanah',
@@ -25,27 +32,17 @@ export const siteProfile: SiteProfile = {
     'Wakaf Produktif',
   ],
   socials: [
-    { label: 'Instagram', target: { kind: 'external', href: 'https://instagram.com/wakafsumur' } },
-    { label: 'Facebook', target: { kind: 'external', href: 'https://facebook.com/wakafsumur' } },
-    { label: 'YouTube', target: { kind: 'external', href: 'https://youtube.com/@wakafsumur' } },
+    { label: 'Instagram', target: { kind: 'external', href: 'https://www.instagram.com/gerakanwakafsumur' } },
+    { label: 'Facebook', target: { kind: 'external', href: 'https://www.facebook.com/gerakanwakafsumur/' } },
+    { label: 'YouTube', target: { kind: 'external', href: 'https://www.youtube.com/@Gerakanwakafsumur' } },
   ],
   footerColumns: [
     {
-      title: 'Program',
-      links: [
-        { label: 'Wakaf Sumur Bor', target: { kind: 'none' } },
-        { label: 'Wakaf Pipa Air', target: { kind: 'none' } },
-        { label: 'Wakaf Sanitasi', target: { kind: 'none' } },
-        { label: 'Laporan Program', target: { kind: 'none' } },
-      ],
-    },
-    {
       title: 'Lembaga',
       links: [
-        { label: 'Tentang Kami', target: { kind: 'none' } },
+        { label: 'Tentang Kami', target: { kind: 'anchor', href: '/tentang-kami' } },
         { label: 'Legalisasi Yayasan', target: { kind: 'none' } },
-        { label: 'Laporan Keuangan', target: { kind: 'none' } },
-        { label: 'Hubungi Kami', target: { kind: 'none' } },
+        { label: 'Hubungi Kami', target: { kind: 'anchor', href: '/#kontak' } },
       ],
     },
     {
@@ -54,7 +51,7 @@ export const siteProfile: SiteProfile = {
         { label: 'FAQ', target: { kind: 'policy', policy: 'faq' } },
         { label: 'Syarat & Ketentuan', target: { kind: 'policy', policy: 'terms' } },
         { label: 'Kebijakan Refund', target: { kind: 'policy', policy: 'refund' } },
-        { label: 'Kebijakan Privasi', target: { kind: 'none' } },
+        { label: 'Kebijakan Privasi', target: { kind: 'policy', policy: 'privacy' } },
       ],
     },
   ],
@@ -62,5 +59,6 @@ export const siteProfile: SiteProfile = {
     { label: 'Syarat & Ketentuan', target: { kind: 'policy', policy: 'terms' } },
     { label: 'FAQ', target: { kind: 'policy', policy: 'faq' } },
     { label: 'Refund Policy', target: { kind: 'policy', policy: 'refund' } },
+    { label: 'Kebijakan Privasi', target: { kind: 'policy', policy: 'privacy' } },
   ],
 };

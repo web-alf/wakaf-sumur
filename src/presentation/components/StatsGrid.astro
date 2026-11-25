@@ -34,6 +34,21 @@ const { stats } = Astro.props;
 .stat-cell {
   background: var(--bg);
   padding: 32px 20px; text-align: center;
+  transition: background .25s ease;
+}
+.stat-num, .stat-lbl { transition: color .25s ease, transform .25s ease; }
+
+/* Hover hanya untuk perangkat dengan kursor; fokus keyboard tidak perlu karena sel tidak interaktif */
+@media (hover: hover) {
+  .stat-cell:hover {
+    background: linear-gradient(150deg, var(--blue-dep) 0%, var(--blue) 100%);
+  }
+  .stat-cell:hover .stat-num { color: var(--gold); transform: translateY(-3px); }
+  .stat-cell:hover .stat-lbl { color: #fff; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stat-cell, .stat-num, .stat-lbl { transition: none; }
+  .stat-cell:hover .stat-num { transform: none; }
 }
 .stat-num {
   font-family: 'Space Grotesk', sans-serif;
@@ -45,5 +60,12 @@ const { stats } = Astro.props;
 .stat-lbl {
   font-size: 11px; font-weight: 600;
   letter-spacing: .1em; text-transform: uppercase; color: var(--fg-muted);
+}
+.stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 700px) {
+  .stats-wrap { padding: 36px 0 32px; }
+  .stat-cell { padding: 22px 6px; }
+  .stat-num { font-size: 1.75rem; }
+  .stat-lbl { font-size: 10.5px; letter-spacing: .06em; }
 }
 </style>

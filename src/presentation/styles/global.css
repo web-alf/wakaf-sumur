@@ -15,6 +15,8 @@
   --gold:     #FDD835;   /* kuning CTA */
   --border:   #BBDEFB;
   --tag-bg:   #E3F2FD;
+  --radius-btn: 14px;   /* radius semua tombol */
+  --grad-section: linear-gradient(150deg, #0A2E6E 0%, #1565C0 55%, #42A5F5 100%); /* gradien Hero, About, CTA */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -80,7 +82,7 @@ a { color: inherit; }
   display: inline-flex; align-items: center; gap: 8px;
   background: #FDD835; color: #0A2340;
   font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px;
-  padding: 14px 28px; border-radius: 100px; text-decoration: none;
+  padding: 14px 28px; border-radius: var(--radius-btn); text-decoration: none;
   transition: transform .2s, box-shadow .2s;
 }
 .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(253,216,53,.55); }
@@ -90,7 +92,7 @@ a { color: inherit; }
   background: rgba(255,255,255,.1); backdrop-filter: blur(12px);
   border: 1.5px solid rgba(255,255,255,.28); color: #fff;
   font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 15px;
-  padding: 14px 28px; border-radius: 100px; text-decoration: none;
+  padding: 14px 28px; border-radius: var(--radius-btn); text-decoration: none;
   transition: background .2s;
 }
 .btn-glass:hover { background: rgba(255,255,255,.18); }
@@ -109,12 +111,17 @@ a { color: inherit; }
   display: inline-flex; align-items: center; gap: 6px;
   font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 14px;
   color: var(--blue); border: 1.5px solid var(--blue);
-  padding: 10px 20px; border-radius: 100px; text-decoration: none;
+  padding: 10px 20px; border-radius: var(--radius-btn); text-decoration: none;
   white-space: nowrap; transition: background .2s, color .2s;
 }
 .btn-line:hover { background: var(--blue); color: #fff; }
 
 /* ── REVEAL ── */
-.r { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
-.r.vis { opacity: 1; transform: translateY(0); }
-@media (prefers-reduced-motion: reduce) { .r { opacity: 1; transform: none; transition: none; } }
+/* .js ditambahkan oleh script inline di <head>: tanpa JS konten tetap terlihat */
+.js .r { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+.js .r.vis { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) { .js .r { opacity: 1; transform: none; transition: none; } }
+
+html { scroll-padding-top: 76px; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+a, button { -webkit-tap-highlight-color: rgba(21, 101, 192, .18); }

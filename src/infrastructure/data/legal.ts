@@ -1,71 +1,5 @@
 import type { LegalDocument } from '../../domain/entities/LegalDocument';
 
-export const terms: LegalDocument = {
-  key: 'terms',
-  title: 'Syarat & Ketentuan',
-  lastUpdated: 'November 2025',
-  sections: [
-    {
-      heading: '1. Penerimaan Syarat',
-      blocks: [
-        {
-          type: 'paragraph',
-          text: 'Dengan melakukan donasi atau wakaf melalui wakafsumur.com, Anda menyatakan telah membaca, memahami, dan menyetujui seluruh syarat dan ketentuan yang berlaku.',
-        },
-      ],
-    },
-    {
-      heading: '2. Sifat Wakaf',
-      blocks: [
-        {
-          type: 'paragraph',
-          text: 'Wakaf bersifat permanen dan tidak dapat ditarik kembali setelah dana disalurkan ke program. Dana wakaf dikelola sesuai prinsip syariah Islam dan perundang-undangan yang berlaku di Indonesia.',
-        },
-      ],
-    },
-    {
-      heading: '3. Pengelolaan Dana',
-      blocks: [
-        {
-          type: 'list',
-          items: [
-            '100% dari nominal wakaf disalurkan ke program pembangunan sumur.',
-            'Biaya operasional yayasan ditanggung dari sumber terpisah (infaq/shadaqah).',
-            'Laporan keuangan dipublikasikan secara berkala dan dapat diakses oleh publik.',
-          ],
-        },
-      ],
-    },
-    {
-      heading: '4. Privasi Data',
-      blocks: [
-        {
-          type: 'paragraph',
-          text: 'Data donatur (nama, nomor telepon, email) digunakan hanya untuk keperluan konfirmasi, pelaporan, dan komunikasi program. Data tidak dijual atau dibagikan kepada pihak ketiga tanpa izin.',
-        },
-      ],
-    },
-    {
-      heading: '5. Perubahan Syarat',
-      blocks: [
-        {
-          type: 'paragraph',
-          text: 'Yayasan berhak memperbarui syarat dan ketentuan sewaktu-waktu. Perubahan material akan diinformasikan kepada donatur terdaftar melalui email atau WhatsApp.',
-        },
-      ],
-    },
-    {
-      heading: '6. Kontak',
-      blocks: [
-        {
-          type: 'paragraph',
-          text: 'Pertanyaan terkait syarat dan ketentuan dapat disampaikan via WhatsApp resmi atau email info@wakafsumur.com.',
-        },
-      ],
-    },
-  ],
-};
-
 export const refund: LegalDocument = {
   key: 'refund',
   title: 'Kebijakan Refund (Pengembalian Dana)',
@@ -121,7 +55,7 @@ export const refund: LegalDocument = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'WhatsApp: <strong>0851-8599-9971</strong> | Email: <strong>info@wakafsumur.com</strong><br>Jam layanan: Senin–Jumat, 08.00–17.00 WIB',
+          text: 'WhatsApp: <strong>0851-8599-9971</strong><br>Jam layanan: Senin–Jumat, 08.00–17.00 WIB',
         },
       ],
     },

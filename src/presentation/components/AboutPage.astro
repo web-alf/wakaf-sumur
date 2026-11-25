@@ -1,0 +1,243 @@
+---
+import type { AboutContent } from '../../domain/entities/About';
+
+interface Props {
+  about: AboutContent;
+}
+
+const { about } = Astro.props;
+const formatNumber = (n: number) => new Intl.NumberFormat('id-ID').format(n);
+---
+
+<!-- HERO -->
+<section class="ab-hero">
+  <div class="ab-dots" aria-hidden="true"></div>
+  <div class="wrap ab-hero-in">
+    <h1 class="ab-h1">{about.heroTitle}<br /><em>{about.heroTitleAccent}</em></h1>
+    <p class="ab-lead">{about.heroLead}</p>
+    <div class="ab-btns">
+      <a class="btn-gold" href="/#donasi">Wakaf Sumur Sekarang</a>
+      <a class="btn-glass" href="#dampak">Lihat Dampak</a>
+    </div>
+  </div>
+</section>
+
+<!-- SIAPA KAMI -->
+<section class="ab-sec">
+  <div class="wrap ab-story">
+    <div class="ab-visual" aria-hidden="true">
+      <div class="ab-rings"><span></span><span></span><span></span>
+        <svg class="ab-drop" width="44" height="44" viewBox="0 0 24 24"><path d="M12 2C8 7 4 10 4 14a8 8 0 0016 0c0-4-4-7-8-12z" fill="#fff"/></svg>
+      </div>
+    </div>
+    <div class="ab-story-txt">
+      <h2 class="sec-h2">{about.storyTitle}</h2>
+      {about.storyParagraphs.map((text) => <p set:html={text} />)}
+    </div>
+  </div>
+</section>
+
+<!-- VISI & MISI -->
+<section class="ab-vm">
+  <div class="wrap">
+    <h2 class="ab-h2-light">Visi &amp; Misi Kami</h2>
+    <div class="ab-vm-grid">
+      <div class="ab-vm-card">
+        <h3>Visi</h3>
+        <p>{about.vision}</p>
+      </div>
+      <div class="ab-vm-card">
+        <h3>Misi</h3>
+        <ul class="ab-list">
+          {about.missions.map((mission) => <li>{mission}</li>)}
+        </ul>
+      </div>
+      <div class="ab-vm-card ab-vm-wide">
+        <h3>Nilai Inti</h3>
+        <dl class="ab-values">
+          {
+            about.values.map((value) => (
+              <div>
+                <dt>{value.name}</dt>
+                <dd>{value.description}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DAMPAK -->
+<section class="ab-sec ab-impact" id="dampak">
+  <div class="wrap ab-head">
+    <h2 class="sec-h2">{about.impactTitle}</h2>
+    <p>{about.impactLead}</p>
+  </div>
+  <div class="wrap">
+    <div class="ab-impact-grid">
+      {
+        about.impactPrograms.map((program) => (
+          <div class="ab-impact-card">
+            <h3>{program.name}</h3>
+            <div class="ab-impact-num">{formatNumber(program.beneficiaries)}</div>
+            <div class="ab-impact-lbl">penerima manfaat</div>
+            <ul>
+              {program.details.map((detail) => <li>{detail}</li>)}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CARA KERJA -->
+<section class="ab-sec ab-soft">
+  <div class="wrap">
+    <div class="ab-head">
+      <h2 class="sec-h2">{about.processTitle}</h2>
+      <p>{about.processLead}</p>
+    </div>
+    <ol class="ab-steps">
+      {
+        about.steps.map((step, i) => (
+          <li class="ab-step">
+            <span class="ab-step-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<!-- PENUTUP -->
+<section class="ab-close">
+  <div class="ab-dots" aria-hidden="true"></div>
+  <div class="wrap ab-close-in">
+    <h2 class="ab-h2-light">{about.closingTitle}</h2>
+    <p>{about.closingLead}</p>
+    <div class="ab-btns ab-btns-center">
+      <a class="btn-gold" href="/#donasi">Wakaf Sumur Sekarang</a>
+      <a class="btn-glass" href="/#program">Lihat Program</a>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ── Blok biru (hero, visi-misi, penutup) memakai gradien section yang sama dengan beranda ── */
+.ab-hero, .ab-vm, .ab-close {
+  background: var(--grad-section); color: #fff;
+  margin: 0 10px; border-radius: 20px; position: relative; overflow: hidden;
+}
+.ab-hero { margin-top: 10px; }
+.ab-close { margin-bottom: 52px; text-align: center; }
+.ab-dots {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255,255,255,.1) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+}
+.ab-hero-in, .ab-close-in { position: relative; z-index: 1; }
+.ab-hero-in { padding-top: 84px; padding-bottom: 84px; }
+.ab-vm { padding: 80px 0; }
+.ab-close-in { padding-top: 80px; padding-bottom: 80px; }
+
+.ab-h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; line-height: 1.1;
+  margin: 0 0 20px; max-width: 760px; text-wrap: balance;
+}
+.ab-h1 em { font-style: normal; color: var(--gold); }
+.ab-lead { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,.88); max-width: 600px; margin: 0 0 34px; }
+.ab-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.ab-btns-center { justify-content: center; }
+
+.ab-h2-light {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; line-height: 1.18;
+  color: #fff; margin: 0; text-wrap: balance;
+}
+.ab-close-in p { font-size: 16px; color: rgba(255,255,255,.88); max-width: 520px; margin: 14px auto 32px; line-height: 1.7; }
+
+/* ── Seksi terang ── */
+.ab-sec { padding: 84px 0; }
+.ab-soft { background: var(--bg-soft); }
+.ab-head { text-align: center; max-width: 640px; margin: 0 auto; }
+.ab-head p { color: var(--fg-muted); font-size: 16px; margin: 12px 0 0; }
+
+.ab-story { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.ab-story-txt p { color: var(--fg-muted); font-size: 16px; line-height: 1.75; margin: 16px 0 0; max-width: 62ch; }
+.ab-story-txt :global(strong) { color: var(--fg); font-weight: 600; }
+.ab-visual {
+  background: var(--tag-bg); border: 1px solid var(--border); border-radius: 20px;
+  aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.ab-rings { position: relative; width: 96px; height: 96px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; }
+.ab-rings span {
+  position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--blue);
+  animation: abRipple 3.2s cubic-bezier(.16, 1, .3, 1) infinite; opacity: 0;
+}
+.ab-rings span:nth-child(2) { animation-delay: 1.05s; }
+.ab-rings span:nth-child(3) { animation-delay: 2.1s; }
+.ab-drop { position: relative; }
+@keyframes abRipple { 0% { transform: scale(1); opacity: .5; } 100% { transform: scale(2.6); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .ab-rings span { animation: none; opacity: .18; }
+  .ab-rings span:nth-child(1) { transform: scale(1.5); }
+  .ab-rings span:nth-child(2) { transform: scale(2); }
+  .ab-rings span:nth-child(3) { transform: scale(2.5); }
+}
+
+/* ── Visi misi ── */
+.ab-vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 36px; }
+.ab-vm-card { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); border-radius: 16px; padding: 28px; }
+.ab-vm-wide { grid-column: 1 / -1; }
+.ab-vm-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--gold); margin: 0 0 12px; }
+.ab-vm-card p { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,.9); margin: 0; }
+.ab-list { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 16px; line-height: 1.6; color: rgba(255,255,255,.9); }
+.ab-values { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 18px 24px; margin: 0; }
+.ab-values dt { font-weight: 700; font-size: 16px; color: #fff; margin-bottom: 4px; }
+.ab-values dd { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.86); }
+
+/* ── Cara kerja ── */
+.ab-steps { list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.ab-step { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 26px 22px; }
+.ab-step-num { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 800; line-height: 1; color: var(--blue); margin-bottom: 14px; font-variant-numeric: tabular-nums; }
+.ab-step h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.02rem; font-weight: 700; color: var(--fg); margin: 0 0 8px; }
+.ab-step p { font-size: 15px; line-height: 1.6; color: var(--fg-muted); margin: 0; }
+
+/* ── Dampak per program ── */
+.ab-impact-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; margin-top: 44px; }
+.ab-impact-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 26px 22px; }
+.ab-impact-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.02rem; font-weight: 700; color: var(--fg); margin: 0 0 16px; }
+.ab-impact-num { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 3.4vw, 2.6rem); font-weight: 800; line-height: 1; color: var(--blue); font-variant-numeric: tabular-nums; }
+.ab-impact-lbl { font-size: 14px; font-weight: 600; color: var(--fg-mid); margin-top: 6px; }
+.ab-impact-card ul { list-style: none; margin: 16px 0 0; padding: 14px 0 0; border-top: 1px solid var(--border); display: grid; gap: 6px; font-size: 15px; color: var(--fg-muted); }
+
+@media (max-width: 900px) {
+  .ab-steps, .ab-impact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .ab-hero, .ab-vm, .ab-close { margin-inline: 8px; border-radius: 16px; }
+  .ab-hero { margin-top: 8px; }
+  .ab-close { margin-bottom: 36px; }
+  .ab-hero-in { padding-top: 48px; padding-bottom: 52px; }
+  .ab-vm { padding: 52px 0; }
+  .ab-close-in { padding-top: 52px; padding-bottom: 52px; }
+  .ab-sec { padding: 52px 0; }
+  .ab-lead { font-size: 16px; margin-bottom: 28px; }
+  .ab-btns { flex-direction: column; }
+  .ab-btns > a { justify-content: center; min-height: 48px; }
+  .ab-story { grid-template-columns: 1fr; gap: 28px; }
+  .ab-visual { aspect-ratio: 16 / 9; }
+  .ab-vm-grid { grid-template-columns: 1fr; margin-top: 28px; }
+  .ab-vm-card { padding: 22px 20px; }
+  .ab-steps, .ab-impact-grid { margin-top: 28px; }
+}
+@media (max-width: 480px) {
+  .ab-steps, .ab-impact-grid { grid-template-columns: 1fr; }
+}
+</style>

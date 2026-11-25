@@ -1,34 +1,63 @@
 import type { Program } from '../../domain/entities/Program';
 
+/**
+ * DAFTAR PROGRAM / CAMPAIGN — ubah di sini.
+ *
+ * Menambah program : salin satu blok { ... }, lalu ganti isinya (id harus unik).
+ * Menghapus program: hapus bloknya.
+ *
+ * imageUrl    : gambar campaign. Taruh file di folder `public/programs/`, lalu isi
+ *               '/programs/nama-file.jpg'. Boleh juga URL penuh (https://...).
+ *               Dikosongkan ('') = tampil ilustrasi bawaan.
+ *               Saran ukuran: 800×450 px (16:9), JPG/WebP, di bawah 200 KB.
+ * imageAlt    : deskripsi singkat isi gambar (untuk pembaca layar).
+ * campaignUrl : link HALAMAN campaign (bukan link gambar). Link gambar masuk ke imageUrl. Dikosongkan ('') =
+ *               tombol mengarah ke halaman daftar campaign (campaignsUrl di site.ts).
+ * category    : 'sumur-bor' | 'pipa-air' | 'sanitasi'
+ * status      : 'priority' (Prioritas) | 'ongoing' (Berjalan) | 'new' (Baru)
+ * collectedAmount : dana terkumpul dalam Rupiah.
+ * targetAmount    : target dalam Rupiah; persentase dihitung otomatis.
+ *               Isi null = tanpa batas target (tampil "Target ∞", tanpa persentase).
+ *               Cocokkan dengan dashboard Moota/Flip sebelum dipublikasikan.
+ */
 export const programs: readonly Program[] = [
   {
-    id: 'sumur-bor-ntt',
-    title: 'Sumur Bor Desa Terpencil — NTT',
+    id: 'WAKAF SUMUR JADI SOLUSI BAGI SANTRI DI TENGAH KEKERINGAN',
+    title: 'WAKAF SUMUR JADI SOLUSI BAGI SANTRI DI TENGAH KEKERINGAN',
     description:
-      '3 desa di Kabupaten Kupang tanpa akses air bersih. Target: 1 sumur bor untuk ±400 jiwa penerima manfaat.',
+      'Musim kemarau membuat sumber air pesantren mulai terbatas. Wakaf sumur hadirkan air bersih bagi kebutuhan santri setiap hari.',
     category: 'sumur-bor',
     status: 'priority',
-    collectedAmount: 36_500_000,
-    targetAmount: 50_000_000,
+    collectedAmount: 578_656,
+    targetAmount: null,
+    imageUrl: 'https://donasi.wakafsumur.com/wp-content/uploads/2026/11/12.webp',
+    imageAlt: '',
+    campaignUrl: 'https://donasi.wakafsumur.com/campaign/wakaf-sumur-santri-di-tengah-kekeringan',
   },
   {
-    id: 'pipa-air-kalimantan',
-    title: 'Instalasi Pipa Air Bersih — Kalimantan',
+    id: 'HADIRKAN SUMBER AIR ABADI DENGAN WAKAF SUMUR BOR',
+    title: 'HADIRKAN SUMBER AIR ABADI DENGAN WAKAF SUMUR BOR',
     description:
-      'Menyambungkan air dari sumber alam ke pemukiman warga Desa Muara Rumbai yang terisolir banjir musiman.',
+      'Mari hentikan krisis air bersih yang melanda pesantren dan desa-desa pelosok dengan solusi yang lebih dalam dan tahan lama.',
     category: 'pipa-air',
     status: 'ongoing',
-    collectedAmount: 22_500_000,
-    targetAmount: 50_000_000,
+    collectedAmount: 480_000,
+    targetAmount: null,
+    imageUrl: 'https://donasi.wakafsumur.com/wp-content/uploads/2026/04/4.webp',
+    imageAlt: '',
+    campaignUrl: 'https://donasi.wakafsumur.com/campaign/hadirkan-sumber-air-abadi-dengan-wakaf-sumur-bor',
   },
   {
-    id: 'sanitasi-pesantren-jateng',
-    title: 'Sumur + Sanitasi Pesantren — Jawa Tengah',
+    id: 'Hadiahkan Wakaf Sumur Untuk Santri di Pondok Pesantren',
+    title: 'Hadiahkan Wakaf Sumur Untuk Santri di Pondok Pesantren',
     description:
-      'Santri belajar dalam kondisi bersih dan sehat. Wakaf sumur + instalasi MCK untuk 200 santri yatim dan dhuafa.',
+      'Bayangkan ribuan santri di pelosok negeri kesulitan untuk mengakses air bersih, bahkan mereka terpaksa berjalan ratusan meter dengan medan yang cukup berbahaya hanya untuk mendapatkan air bersih meskipun sedang berpuasa.',
     category: 'sanitasi',
     status: 'new',
-    collectedAmount: 9_000_000,
-    targetAmount: 50_000_000,
+    collectedAmount: 345_551_301,
+    targetAmount: null,
+    imageUrl: 'https://donasi.wakafsumur.com/wp-content/uploads/2026/11/3.webp',
+    imageAlt: '',
+    campaignUrl: 'https://donasi.wakafsumur.com/campaign/hadiahkan-wakaf-sumur-untuk-santri',
   },
 ];

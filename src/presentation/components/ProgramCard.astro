@@ -9,22 +9,40 @@ interface Props {
 
 const { program } = Astro.props;
 const visual = categoryVisual[program.category];
+const imageUrl = program.imageUrl?.trim();
+const imageAlt = program.imageAlt?.trim() || program.title;
 ---
 
 <div class="prog-card r">
-  <div class={`prog-vis ${visual.tone}`}>
-    <span role="img" aria-label={visual.label}>{visual.emoji}</span>
+  <div class:list={['prog-vis', visual.tone, { 'has-img': imageUrl }]}>
+    {
+      imageUrl ? (
+        <img class="prog-img" src={imageUrl} alt={imageAlt} loading="lazy" decoding="async" />
+      ) : (
+        <span role="img" aria-label={visual.label}>{visual.emoji}</span>
+      )
+    }
     <span class="prog-badge">{statusLabel[program.status]}</span>
   </div>
   <div class="prog-body">
     <div class="prog-title">{program.title}</div>
     <div class="prog-desc">{program.description}</div>
-    <div class="prog-bar-wrap"><div class="prog-fill" style={`width:${program.progressPercent}%`}></div></div>
+    {
+      program.progressPercent !== null && (
+        <div class="prog-bar-wrap"><div class="prog-fill" style={`width:${program.progressPercent}%`} /></div>
+      )
+    }
     <div class="prog-meta">
       <span>{formatRupiahShort(program.collectedAmount)} terkumpul</span>
-      <span class="prog-pct">{program.progressPercent}%</span>
+      {
+        program.progressPercent !== null ? (
+          <span class="prog-pct">{program.progressPercent}%</span>
+        ) : (
+          <span class="prog-pct">Target <span aria-hidden="true">∞</span><span class="sr-only">tanpa batas</span></span>
+        )
+      }
     </div>
-    <a class="prog-cta" href="#donasi">Ikut Berwakaf</a>
+    <a class="prog-cta" href={program.ctaUrl}>Ikut Berwakaf</a>
   </div>
 </div>
 
@@ -49,6 +67,9 @@ const visual = categoryVisual[program.category];
   text-transform: uppercase; background: rgba(255,255,255,.18);
   color: #fff; padding: 4px 10px; border-radius: 100px;
 }
+.prog-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Di atas foto, badge butuh latar pekat agar tetap terbaca */
+.has-img .prog-badge { background: rgba(10,35,64,.78); z-index: 1; }
 .prog-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
 .prog-title {
   font-family: 'Space Grotesk', sans-serif; font-size: .97rem;
@@ -62,7 +83,12 @@ const visual = categoryVisual[program.category];
 .prog-cta {
   display: block; text-align: center; background: var(--blue); color: #fff;
   font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 14px;
-  padding: 12px; border-radius: 10px; text-decoration: none; transition: background .2s;
+  padding: 12px; border-radius: var(--radius-btn); text-decoration: none; transition: background .2s;
 }
 .prog-cta:hover { background: var(--blue-dk); }
+@media (max-width: 700px) {
+  .prog-vis { height: 132px; font-size: 46px; }
+  .prog-desc { font-size: 15px; }
+  .prog-cta { min-height: 48px; display: flex; align-items: center; justify-content: center; padding-block: 0; }
+}
 </style>

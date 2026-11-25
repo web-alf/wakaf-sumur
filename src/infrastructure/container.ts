@@ -1,3 +1,4 @@
+import { GetAboutPage } from '../application/usecases/GetAboutPage';
 import { GetLandingPage } from '../application/usecases/GetLandingPage';
 import { GetPolicies } from '../application/usecases/GetPolicies';
 import { StaticContentRepository } from './repositories/StaticContentRepository';
@@ -7,3 +8,4 @@ const contentRepository = new StaticContentRepository();
 
 export const getLandingPage = new GetLandingPage(contentRepository);
 export const getPolicies = new GetPolicies(contentRepository);
+export const getAboutPage = new GetAboutPage(contentRepository);

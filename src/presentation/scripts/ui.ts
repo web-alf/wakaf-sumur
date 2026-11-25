@@ -8,6 +8,28 @@ if (nav) {
   toggle();
 }
 
+// ── Menu navigasi mobile ──
+function setMenu(open: boolean) {
+  if (!nav) return;
+  nav.classList.toggle('menu-open', open);
+  const toggle = nav.querySelector<HTMLElement>('[data-nav-toggle]');
+  toggle?.setAttribute('aria-expanded', String(open));
+  toggle?.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
+}
+document.addEventListener('click', (event) => {
+  if (!nav) return;
+  const target = event.target as HTMLElement | null;
+  if (!target) return;
+  if (target.closest('[data-nav-toggle]')) {
+    setMenu(!nav.classList.contains('menu-open'));
+  } else if (target.closest('.nav-links a') || !target.closest('nav')) {
+    setMenu(false);
+  }
+});
+window.matchMedia('(min-width: 681px)').addEventListener('change', (e) => {
+  if (e.matches) setMenu(false);
+});
+
 function openModal(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -104,7 +126,10 @@ document.addEventListener('click', (event) => {
 });
 
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') closeAllModals();
+  if (event.key === 'Escape') {
+    closeAllModals();
+    setMenu(false);
+  }
 });
 
 const revealObserver = new IntersectionObserver(

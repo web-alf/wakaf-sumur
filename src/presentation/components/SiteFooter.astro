@@ -48,7 +48,7 @@ footer {
   padding: 56px 0 28px;
 }
 .footer-grid {
-  display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  display: grid; grid-template-columns: 1.6fr 1fr 1fr;
   gap: 36px; margin-bottom: 48px;
 }
 .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
@@ -87,5 +87,17 @@ footer {
 @media (max-width: 500px) {
   .footer-grid { grid-template-columns: 1fr; gap: 24px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 700px) {
+  footer { padding: 44px 0 calc(28px + 72px + env(safe-area-inset-bottom, 0px)); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 20px 16px; margin-bottom: 32px; }
+  .footer-grid > :first-child { grid-column: 1 / -1; }
+  .footer-socials { gap: 2px; margin-inline: -10px; }
+  .footer-socials :global(a) { display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px; font-size: 14px; color: rgba(255,255,255,.8); }
+  .footer-links { gap: 0; }
+  .footer-links :global(a) { display: flex; align-items: center; min-height: 44px; font-size: 15px; color: rgba(255,255,255,.85); }
+  .footer-leg { flex-wrap: wrap; gap: 0 8px; margin-inline: -6px; }
+  .footer-leg :global(a) { display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px; font-size: 13px; color: rgba(255,255,255,.8); }
+  .footer-copy { font-size: 13px; color: rgba(255,255,255,.75); }
 }
 </style>

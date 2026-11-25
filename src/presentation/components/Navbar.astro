@@ -1,5 +1,6 @@
 ---
 import type { SiteProfile } from '../../domain/entities/SiteProfile';
+import { buildWhatsAppUrl } from '../../domain/services/whatsapp';
 import SiteLinkAnchor from './SiteLinkAnchor.astro';
 
 interface Props {
@@ -7,18 +8,23 @@ interface Props {
 }
 
 const { site } = Astro.props;
+const contactUrl = buildWhatsAppUrl(site.whatsappNumber, site.whatsappGreetings.contact);
 ---
 
-<nav id="nav">
+<nav id="nav" data-nav>
   <div class="wrap">
     <div class="nav-inner">
-      <a class="nav-logo" href="#" aria-label={site.name}>
+      <a class="nav-logo" href="/" aria-label={site.name}>
         <img class="logo-img" src={site.logoUrl} alt={site.name} width="256" height="76" />
       </a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-menu">
         {site.navLinks.map((link) => <li><SiteLinkAnchor link={link} /></li>)}
       </ul>
-      <a class="btn-nav" href="#donasi">Wakaf Sekarang →</a>
+      <a class="btn-nav" href={contactUrl} target="_blank" rel="noopener">Hubungi Kami</a>
+      <button class="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="nav-menu" data-nav-toggle>
+        <svg class="ico-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+        <svg class="ico-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -69,7 +75,7 @@ nav.scrolled {
   display: inline-flex; align-items: center; gap: 6px;
   background: var(--gold); color: #0A2340;
   font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px;
-  padding: 10px 22px; border-radius: 100px; text-decoration: none;
+  padding: 10px 22px; border-radius: var(--radius-btn); text-decoration: none;
   white-space: nowrap; transition: background .2s, transform .15s;
 }
 .btn-nav:hover { background: #F9C810; transform: translateY(-1px); }
@@ -77,5 +83,31 @@ nav.scrolled {
 @media (max-width: 680px) {
   .nav-links { display: none; }
   .btn-nav   { padding: 9px 16px; font-size: 13px; }
+}
+.nav-toggle { display: none; }
+@media (max-width: 680px) {
+  .nav-inner { gap: 8px; }
+  .logo-img { height: 34px; }
+  .btn-nav { min-height: 44px; padding: 0 16px; font-size: 13px; }
+  .nav-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; flex-shrink: 0; margin-right: -8px;
+    color: var(--fg); background: transparent; border: 0; border-radius: var(--radius-btn); cursor: pointer;
+  }
+  .nav-toggle:focus-visible { outline: 3px solid var(--blue); outline-offset: 0; }
+  .nav-toggle .ico-close { display: none; }
+  nav.menu-open .nav-toggle .ico-open { display: none; }
+  nav.menu-open .nav-toggle .ico-close { display: block; }
+  nav.menu-open { border-color: var(--border); }
+  .nav-links {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 4px max(20px, env(safe-area-inset-left, 0px)) 14px;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, .12);
+  }
+  nav.menu-open .nav-links { display: flex; }
+  .nav-links :global(a) { display: flex; align-items: center; min-height: 52px; font-size: 17px; opacity: 1; border-bottom: 1px solid var(--border); }
+  .nav-links li:last-child :global(a) { border-bottom: 0; }
 }
 </style>

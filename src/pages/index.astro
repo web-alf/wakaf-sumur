@@ -1,4 +1,5 @@
 ---
+import { buildWhatsAppUrl } from '../domain/services/whatsapp';
 import { getLandingPage, getPolicies } from '../infrastructure/container';
 import BaseLayout from '../presentation/layouts/BaseLayout.astro';
 import Navbar from '../presentation/components/Navbar.astro';
@@ -24,17 +25,17 @@ const policies = await getPolicies.execute();
   description="Program wakaf air bersih yang amanah, transparan, dan tersalurkan langsung ke desa yang membutuhkan di seluruh Indonesia."
 >
   <Navbar site={page.site} />
-  <Hero />
+  <Hero campaignsUrl={page.site.campaignsUrl} />
   <StatsGrid stats={page.stats} />
   <MarqueeBand items={page.site.highlights} />
   <AboutSection />
   <WhySection reasons={page.reasons} />
-  <ProgramsSection programs={page.programs} />
+  <ProgramsSection programs={page.programs} campaignsUrl={page.site.campaignsUrl} />
   <TestimonialsSection testimonials={page.testimonials} />
   <DonationCta site={page.site} bankAccounts={page.bankAccounts} />
   <SiteFooter site={page.site} />
 
   <FaqModal items={policies.faq} />
   {policies.documents.map((document) => <LegalModal document={document} />)}
-  <WhatsAppFloat href={page.site.whatsappUrl} />
+  <WhatsAppFloat href={buildWhatsAppUrl(page.site.whatsappNumber, page.site.whatsappGreetings.floating)} />
 </BaseLayout>

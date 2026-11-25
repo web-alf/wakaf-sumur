@@ -11,11 +11,12 @@ export interface LegalSection {
   readonly blocks: readonly LegalBlock[];
 }
 
-export type LegalDocumentKey = 'terms' | 'refund';
+export type LegalDocumentKey = 'terms' | 'refund' | 'privacy';
 
 export interface LegalDocument {
   readonly key: LegalDocumentKey;
   readonly title: string;
-  readonly lastUpdated: string;
+  /** Kosong = baris "Terakhir diperbarui" tidak ditampilkan. */
+  readonly lastUpdated?: string;
   readonly sections: readonly LegalSection[];
 }

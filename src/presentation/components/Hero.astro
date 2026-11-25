@@ -1,4 +1,10 @@
 ---
+interface Props {
+  /** Halaman daftar campaign; kosong = seksi program di halaman ini. */
+  campaignsUrl?: string;
+}
+
+const programsUrl = Astro.props.campaignsUrl?.trim() || '#program';
 ---
 
 <section class="hero">
@@ -7,7 +13,7 @@
     <path d="M0 40 C200 70 400 10 600 40 C800 70 1000 10 1200 40 L1200 72 L0 72Z" fill="#FFFFFF" opacity=".92"/>
     <path d="M0 55 C300 30 600 72 900 50 C1050 38 1150 60 1200 55 L1200 72 L0 72Z" fill="#FFFFFF"/>
   </svg>
-  <div class="hero-content wrap" style="padding-top:80px;padding-bottom:88px;">
+  <div class="hero-content wrap">
     <div class="hero-left">
       <div class="hero-eyebrow">Wakaf Sumur Air Bersih — Indonesia</div>
       <h1 class="hero-h1">Satu sumur,<br /><em>ribuan</em><br />berkah mengalir.</h1>
@@ -17,8 +23,7 @@
         menyejukkan ribuan jiwa di pelosok negeri.
       </p>
       <div class="hero-btns">
-        <a class="btn-gold" href="#donasi">Wakafkan Sekarang →</a>
-        <a class="btn-glass" href="#program">Lihat Program</a>
+        <a class="btn-gold" href={programsUrl}>Lihat Program</a>
       </div>
     </div>
     <div class="hero-visual" aria-hidden="true">
@@ -56,7 +61,7 @@
   margin: 10px 10px 0;
   border-radius: 20px;
   overflow: hidden;
-  background: linear-gradient(155deg, #0A2E6E 0%, #1565C0 48%, #42A5F5 100%);
+  background: var(--grad-section);
   position: relative;
 }
 .hero-dots {
@@ -104,5 +109,12 @@
   .hero { margin: 8px 8px 0; border-radius: 16px; }
   .hero-content { grid-template-columns: 1fr; }
   .hero-visual { display: none; }
+}
+.hero-content { padding-top: 80px; padding-bottom: 88px; }
+@media (max-width: 700px) {
+  .hero-content { padding-top: 44px; padding-bottom: 88px; }
+  .hero-desc { font-size: 16px; margin-bottom: 28px; }
+  .hero-btns { flex-direction: column; }
+  .hero-btns > a { justify-content: center; min-height: 48px; }
 }
 </style>
